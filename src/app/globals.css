@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Taanzera";
+  src: url("/fonts/taanzera.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+.taanzera {
+  font-family: "Taanzera", sans-serif;
+}
