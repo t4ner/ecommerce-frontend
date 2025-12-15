@@ -61,7 +61,7 @@ export default function Navbar() {
                     onMouseEnter={() => setHoveredCategory(category._id)}
                     onMouseLeave={() => setHoveredCategory(null)}
                   >
-                    <div className="bg-white border border-gray-300 shadow-lg rounded-md py-2 min-w-[300px]">
+                    <div className="bg-white border border-gray-300  rounded-md py-2 min-w-[300px]">
                       <ul className="flex flex-col">
                         {category.children.map((child) => (
                           <li key={child._id}>

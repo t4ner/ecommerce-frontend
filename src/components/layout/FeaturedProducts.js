@@ -98,12 +98,24 @@ export default function FeaturedProducts() {
                 {/* Image */}
                 <div className="relative border border-gray-100 shadow-md w-[350px] h-[300px] overflow-hidden rounded-lg mb-5">
                   {product.images?.[0] ? (
-                    <Image
-                      src={product.images[0]}
-                      alt={product.name}
-                      fill
-                      className="object-cover p-3 transition-transform duration-500 group-hover:scale-105"
-                    />
+                    <>
+                      <Image
+                        src={product.images[0]}
+                        alt={product.name}
+                        fill
+                        className={`object-cover p-3 transition-opacity duration-500 ${
+                          product.images?.[1] ? "group-hover:opacity-0" : ""
+                        }`}
+                      />
+                      {product.images?.[1] && (
+                        <Image
+                          src={product.images[1]}
+                          alt={product.name}
+                          fill
+                          className="object-cover p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                        />
+                      )}
+                    </>
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-xs text-gray-400">
                       Görsel Yok
