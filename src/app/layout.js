@@ -1,21 +1,29 @@
 import "../styles/globals.css";
 import { Montserrat } from "next/font/google";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
-import Header from "@/components/Header";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/layout/Header";
+import Navbar from "@/components/layout/Navbar";
+import TopBar from "@/components/layout/TopBar";
+import Footer from "@/components/layout/Footer";
+
 const montserrat = Montserrat({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-montserrat",
 });
 
 export default function RootLayout({ children }) {
   return (
     <html lang="tr">
-      <body className="font-[montserrat]">
+      <body
+        className={`${montserrat.variable} font-[montserrat]`}
+      >
         <ReactQueryProvider>
+          <TopBar />
           <Header />
           <Navbar />
           <main className="container mx-auto">{children}</main>
+          <Footer />
         </ReactQueryProvider>
       </body>
     </html>
