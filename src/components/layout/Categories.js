@@ -46,7 +46,7 @@ export default function Categories() {
   return (
     <section>
       {/* Title */}
-      <h2 className="text-[14px] font-[550] uppercase tracking-widest mb-15">
+      <h2 className="text-[14px] font-[550] uppercase tracking-widest mb-10">
         Kategoriler
       </h2>
 
@@ -60,7 +60,7 @@ export default function Categories() {
               className="keen-slider__slide group flex flex-col items-center"
             >
               {/* Category Container */}
-              <div className="relative w-56 h-56 flex items-center justify-center">
+              <div className="relative w-64 h-56 flex items-center justify-center">
                 {/* Background Icon - Arka plan */}
                 <Image
                   src="/images/icons/icon.svg"
@@ -75,7 +75,7 @@ export default function Categories() {
                   <Image
                     src={category.imageUrl}
                     alt={category.name}
-                    width={180}
+                    width={200}
                     height={180}
                     className="relative z-10 object-contain transition-transform duration-300 group-hover:scale-110"
                   />
@@ -83,7 +83,7 @@ export default function Categories() {
               </div>
 
               {/* Category Name */}
-              <span className="mt-5 text-center text-[12px] font-[550] uppercase tracking-widest text-gray-900">
+              <span className="mt-5 border border-gray-200 py-2 px-5 rounded-lg text-center text-[12px] font-[550] uppercase tracking-widest text-gray-900">
                 {category.name}
               </span>
             </Link>

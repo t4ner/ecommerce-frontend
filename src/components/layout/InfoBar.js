@@ -23,7 +23,7 @@ export default function InfoBar() {
     <section>
       <div className="flex items-center justify-around">
         {features.map((feature, index) => (
-          <div key={index} className="flex items-end justify-center gap-4">
+          <div key={index} className="flex items-center justify-center gap-x-4">
             {/* Icon with scalloped border */}
             <div className="relative shrink-0">
               <div className="w-16 h-16 rounded-lg bg-[#F4F4F4] flex items-center justify-center relative">
@@ -41,13 +41,11 @@ export default function InfoBar() {
             </div>
 
             {/* Text content */}
-            <div className="flex flex-col mb-1">
-              <h3 className="font-[550] text-[11px] uppercase tracking-widest mb-1">
+            <div className="flex flex-col">
+              <h3 className="font-[550] text-[12px] uppercase tracking-widest">
                 {feature.title}
               </h3>
-              <p className="text-gray-400 text-[11px] font-[550] uppercase tracking-wider">
-                {feature.description}
-              </p>
+        
             </div>
           </div>
         ))}

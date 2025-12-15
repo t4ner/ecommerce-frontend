@@ -19,8 +19,7 @@ export default function FeaturedProducts() {
   const [sliderRef, sliderInstanceRef] = useKeenSlider({
     mode: "free-snap",
     slides: {
-      perView: 3.5,
-      spacing: 32,
+      perView: 4.1,
     },
     rubberband: true,
   });
@@ -62,7 +61,7 @@ export default function FeaturedProducts() {
   return (
     <section>
       {/* Header */}
-      <div className="flex items-center justify-between mb-14">
+      <div className="flex items-center justify-between mb-10">
         <h2 className="text-[14px] font-[550] uppercase tracking-widest">
           Öne Çıkan Ürünler
         </h2>
@@ -73,7 +72,7 @@ export default function FeaturedProducts() {
               <button
                 key={category._id}
                 onClick={() => setSelectedCategory(category._id)}
-                className={`relative text-[13px] font-[550] tracking-widest uppercase transition-colors after:absolute after:left-0 after:-bottom-1 after:h-0.25 after:bg-gray-900 after:transition-all ${
+                className={`relative text-[13px] cursor-pointer font-[550] tracking-widest uppercase transition-colors after:absolute after:left-0 after:-bottom-1 after:h-0.25 after:bg-gray-900 after:transition-all ${
                   selectedCategory === category._id
                     ? "text-gray-900 after:w-full"
                     : "text-gray-400 hover:text-gray-700 after:w-0"
@@ -97,13 +96,13 @@ export default function FeaturedProducts() {
                 className="keen-slider__slide group flex flex-col"
               >
                 {/* Image */}
-                <div className="relative w-[350px] h-[300px] bg-gray-100 overflow-hidden rounded-lg mb-5">
+                <div className="relative border border-gray-100 shadow-md w-[350px] h-[300px] overflow-hidden rounded-lg mb-5">
                   {product.images?.[0] ? (
                     <Image
                       src={product.images[0]}
                       alt={product.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover p-3 transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-xs text-gray-400">
@@ -113,15 +112,15 @@ export default function FeaturedProducts() {
                 </div>
 
                 {/* Info */}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 px-1">
                   <h3 className="uppercase text-[13px] font-[550] tracking-wider text-gray-900">
                     {product.name}
                   </h3>
-                  <p className="text-sm font-medium text-gray-700">
+                  <p className="text-sm font-[550] text-gray-700">
                     <span className="text-[13px] font-[550] tracking-wider text-gray-900">
                       ₺
                     </span>{" "}
-                    {(product.price / 100).toFixed(2)}
+                    {product.price}
                   </p>
                 </div>
               </Link>

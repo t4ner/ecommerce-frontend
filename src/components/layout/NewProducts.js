@@ -12,8 +12,7 @@ export default function NewProducts() {
   const [sliderRef, sliderInstanceRef] = useKeenSlider({
     mode: "free-snap",
     slides: {
-      perView: 3.5,
-      spacing: 32,
+      perView: 4.2,
     },
     rubberband: true,
   });
@@ -41,7 +40,7 @@ export default function NewProducts() {
   return (
     <section>
       {/* Header */}
-      <div className="flex items-center justify-between mb-14">
+      <div className="flex items-center justify-between mb-10">
         <h2 className="text-[14px] font-[550] uppercase tracking-widest text-gray-900">
           Yeni Ürünler
         </h2>
@@ -58,13 +57,13 @@ export default function NewProducts() {
                 className="keen-slider__slide group flex flex-col"
               >
                 {/* Image */}
-                <div className="relative w-[350px] h-[300px] bg-gray-100 overflow-hidden rounded-lg mb-5">
+                <div className="relative border border-gray-100 shadow-md w-[350px] h-[300px] overflow-hidden rounded-lg mb-5">
                   {product.images?.[0] ? (
                     <Image
                       src={product.images[0]}
                       alt={product.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover p-3 transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-xs text-gray-400">
@@ -74,15 +73,15 @@ export default function NewProducts() {
                 </div>
 
                 {/* Info */}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 px-1">
                   <h3 className="uppercase text-[13px] font-[550] tracking-wider text-gray-900">
                     {product.name}
                   </h3>
-                  <p className="text-sm font-medium text-gray-700">
+                  <p className="text-sm font-[550] text-gray-700">
                     <span className="text-[13px] font-[550] tracking-wider text-gray-900">
                       ₺
                     </span>{" "}
-                    {(product.price / 100).toFixed(2)}
+                    {product.price}
                   </p>
                 </div>
               </Link>

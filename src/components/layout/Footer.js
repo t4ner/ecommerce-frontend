@@ -24,25 +24,9 @@ export default function Footer() {
   return (
     <footer className="pt-14 mt-30 bg-black text-white">
       <div className="container mx-auto">
-        {/* First Row - Legal Links */}
-        <div className="flex flex-wrap items-center justify-center gap-4 py-4 border-y border-gray-400">
-          {legalLinks.map((link, index) => (
-            <span key={link.name} className="flex items-center">
-              <Link
-                href={link.href}
-                className="text-[11px] font-[550] uppercase tracking-widest transition-colors hover:text-gray-900"
-              >
-                {link.name}
-              </Link>
-              {index < legalLinks.length - 1 && (
-                <span className="mx-2 text-gray-300">•</span>
-              )}
-            </span>
-          ))}
-        </div>
 
         {/* Second Row - Categories */}
-        <div className="flex flex-wrap items-center justify-center gap-4 py-4 border-b border-gray-400">
+        <div className="flex flex-wrap items-center justify-center gap-4 py-4 border-t border-gray-400">
           {mainCategories && mainCategories.length > 0 ? (
             mainCategories.map((category, index) => (
               <span key={category._id} className="flex items-center">
@@ -76,6 +60,23 @@ export default function Footer() {
             </div>
           )}
         </div>
+        {/* First Row - Legal Links */}
+        <div className="flex flex-wrap items-center justify-center gap-4 py-4 border-y border-gray-400">
+          {legalLinks.map((link, index) => (
+            <span key={link.name} className="flex items-center">
+              <Link
+                href={link.href}
+                className="text-[11px] font-[550] uppercase tracking-widest transition-colors hover:text-gray-900"
+              >
+                {link.name}
+              </Link>
+              {index < legalLinks.length - 1 && (
+                <span className="mx-2 text-gray-300">•</span>
+              )}
+            </span>
+          ))}
+        </div>
+
 
         {/* Bottom Section - Logo, Attribution, Social */}
         <div className="pt-10">
