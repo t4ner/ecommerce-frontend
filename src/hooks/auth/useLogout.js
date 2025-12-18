@@ -14,8 +14,12 @@ export const useLogout = () => {
     onSuccess: () => {
       // Access token'ı localStorage'dan temizle
       localStorage.removeItem("accessToken");
+      // Kullanıcı bilgilerini localStorage'dan temizle
+      localStorage.removeItem("user");
       // Refresh token cookie'de, backend logout endpoint'i temizler
       console.log("Logout successful");
+      // Auth değişikliğini bildir
+      window.dispatchEvent(new Event("auth-change"));
       // Login sayfasına yönlendir
       router.push("/hesap/giris");
     },
@@ -23,6 +27,9 @@ export const useLogout = () => {
       console.error("Logout error:", error);
       // Hata olsa bile token'ları temizle ve yönlendir
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+      // Auth değişikliğini bildir
+      window.dispatchEvent(new Event("auth-change"));
       router.push("/hesap/giris");
     },
   });

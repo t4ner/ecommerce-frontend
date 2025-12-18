@@ -1,14 +1,41 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/hooks/cart/useCart";
 import { useCartSidebarStore } from "@/stores/cartNotificationStore";
+import { useLogout } from "@/hooks/auth/useLogout";
 
 export default function Header() {
   const { data: cart } = useCart();
   const { openSidebar } = useCartSidebarStore();
+  const { mutate: logout, isPending: isLoggingOut } = useLogout();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const cartItemCount = cart?.itemCount || cart?.cart?.items?.length || 0;
+
+  // Kullanıcı giriş durumunu kontrol et
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem("accessToken");
+      setIsLoggedIn(!!token);
+    };
+
+    checkAuth();
+    // Storage event'lerini dinle (başka tab'lerde logout yapıldığında)
+    window.addEventListener("storage", checkAuth);
+    // Custom event dinle (aynı tab'de logout yapıldığında)
+    window.addEventListener("auth-change", checkAuth);
+
+    return () => {
+      window.removeEventListener("storage", checkAuth);
+      window.removeEventListener("auth-change", checkAuth);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <header className="container mx-auto">
@@ -48,16 +75,53 @@ export default function Header() {
 
         {/* Action Icons */}
         <div className="flex items-center gap-10">
-          <Link href="/hesap/giris">
-            {" "}
-            <Image
-              src="/images/icons/profile.svg"
-              alt="profile"
-              width={25}
-              height={25}
-              style={{ width: "auto", height: "auto" }}
-            />
-          </Link>
+          {isLoggedIn ? (
+            <>
+              {/* Profil Linki */}
+              <Link
+                href="/profil"
+                className="cursor-pointer hover:opacity-70 transition-opacity"
+                aria-label="Profil"
+              >
+                <Image
+                  src="/images/icons/profile.svg"
+                  alt="profile"
+                  width={25}
+                  height={25}
+                  style={{ width: "auto", height: "auto" }}
+                />
+              </Link>
+
+              {/* Logout Butonu */}
+              <button
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+                className="cursor-pointer hover:opacity-70 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Çıkış yap"
+              >
+                <Image
+                  src="/images/icons/logout.svg"
+                  alt="logout"
+                  width={23}
+                  height={23}
+                />
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/hesap/giris"
+              className="cursor-pointer hover:opacity-70 transition-opacity"
+              aria-label="Giriş yap"
+            >
+              <Image
+                src="/images/icons/profile.svg"
+                alt="login"
+                width={25}
+                height={25}
+                style={{ width: "auto", height: "auto" }}
+              />
+            </Link>
+          )}
 
           <button
             onClick={openSidebar}
