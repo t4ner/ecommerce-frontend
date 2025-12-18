@@ -11,7 +11,7 @@ export default function ProductDetail({ product }) {
     return Math.floor(Math.random() * 10) + 1;
   }, [product._id]);
   return (
-    <div className="py-8 lg:pt-10">
+    <div className="py-14">
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-16">
         {/* Sol Taraf - Görseller (Sayfa scroll'u ile kayar) */}
         <div className="space-y-4 lg:col-span-4">

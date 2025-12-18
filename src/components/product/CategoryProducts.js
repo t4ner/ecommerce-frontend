@@ -48,7 +48,7 @@ export default function CategoryProducts({ categorySlug }) {
   const categoryName = products[0]?.category?.name || "Kategori";
 
   return (
-    <div className="pt-10">
+    <div className="py-14">
       {/* Kategori Başlığı */}
       <div className="mb-10">
         <h1 className="text-[13px] font-[550] uppercase tracking-widest text-gray-900 mb-2">

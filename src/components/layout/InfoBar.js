@@ -20,7 +20,7 @@ export default function InfoBar() {
   ];
 
   return (
-    <section>
+    <section className="mb-14">
       <div className="flex items-center justify-around">
         {features.map((feature, index) => (
           <div key={index} className="flex items-center justify-center gap-x-4">

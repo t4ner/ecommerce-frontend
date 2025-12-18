@@ -22,7 +22,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="pt-14 mt-12 bg-black text-white">
+    <footer className="pt-14 bg-black text-white">
       <div className="container mx-auto">
 
         {/* Second Row - Categories */}
