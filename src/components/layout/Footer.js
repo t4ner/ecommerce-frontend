@@ -10,7 +10,7 @@ export default function Footer() {
   // Ana kategorileri al (parentId: null olanlar)
   const mainCategories = categories
     ?.filter((category) => category.parentId === null)
-    ?.slice(0, 5); // İlk 5 kategoriyi al
+    // İlk 5 kategoriyi al
 
   const legalLinks = [
     { name: "HAKKIMIZDA", href: "/hakkimizda" },
