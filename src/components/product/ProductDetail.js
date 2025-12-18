@@ -63,14 +63,14 @@ export default function ProductDetail({ product }) {
             </div>
 
             {/* Ürün Adı */}
-            <h1 className="text-[20px] font-[550] text-gray-900 uppercase tracking-widest">
+            <h1 className="text-[20px]  font-[550] text-gray-900 uppercase tracking-widest">
               {product.name}
             </h1>
 
             {/* Fiyat */}
             <div className="flex items-end gap-x-5">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-xl font-[550] tracking-wider">₺</span>
+                <span className="text-3xl font-medium tracking-wider">₺</span>
                 <span className="text-4xl font-[poppins] font-light tracking-tight text-gray-900">
                   {product.price}
                 </span>
@@ -224,7 +224,7 @@ export default function ProductDetail({ product }) {
               <div className="pt-6 border-t border-gray-200">
                 <button
                   onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
-                  className="w-full flex items-center justify-between bg-gray-100 py-3 hover:bg-gray-200 transition-colors duration-200"
+                  className="w-full flex items-center justify-between bg-gray-100 py-4 hover:bg-gray-200 transition-colors duration-500"
                   aria-expanded={isDescriptionOpen}
                 >
                   <h2 className="text-[11px] pl-5 font-[550] uppercase tracking-widest text-gray-900">
@@ -233,22 +233,22 @@ export default function ProductDetail({ product }) {
                   <Image
                     src="/images/icons/arrow-bottom.svg"
                     alt="arrow-down"
-                    width={20}
-                    height={20}
-                    className={`w-5 h-5 mr-2 text-gray-900 transition-transform duration-300 ${
+                    width={17}
+                    height={17}
+                    className={`w-4 h-4 mr-5 text-gray-900 transition-transform duration-500 ${
                       isDescriptionOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
                     isDescriptionOpen
                       ? "max-h-[500px] opacity-100"
                       : "max-h-0 opacity-0"
                   }`}
                 >
                   <div className="bg-white px-1 py-4 border-t border-gray-200">
-                    <p className="text-[11px] font-[Prompt] uppercase  tracking-wider leading-5 text-gray-500">
+                    <p className="text-[10px] font-medium uppercase  tracking-[0.07em] leading-5 text-gray-500">
                       {product.description}
                     </p>
                   </div>

@@ -1,12 +1,13 @@
 import "../styles/globals.css";
 import { Montserrat } from "next/font/google";
 import { Poppins } from "next/font/google";
-import { Prompt } from "next/font/google";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
 import TopBar from "@/components/layout/TopBar";
 import Footer from "@/components/layout/Footer";
+
+
 
 const montserrat = Montserrat({
   subsets: ["latin"],
