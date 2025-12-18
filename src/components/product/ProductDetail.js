@@ -70,12 +70,12 @@ export default function ProductDetail({ product }) {
             {/* Fiyat */}
             <div className="flex items-end gap-x-5">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-3xl font-medium tracking-wider">₺</span>
-                <span className="text-4xl font-[poppins] font-light tracking-tight text-gray-900">
+                <span className="text-2xl font-semibol tracking-wider">₺</span>
+                <span className="text-4xl font-[Rubik] font-light tracking-wide text-gray-900">
                   {product.price}
                 </span>
-                <span className="text-xl font-[poppins] font-light text-gray-500">
-                  .00
+                <span className="text-xl font-[Merriweather] font-light text-gray-600">
+                  . 00 
                 </span>
               </div>
             </div>

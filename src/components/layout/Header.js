@@ -39,14 +39,16 @@ export default function Header() {
 
         {/* Action Icons */}
         <div className="flex items-center gap-10">
-          <button type="button" aria-label="Profile" className="cursor-pointer">
+          <Link href="/hesap/giris">
+            {" "}
             <Image
               src="/images/icons/profile.svg"
               alt="profile"
               width={25}
               height={25}
             />
-          </button>
+          </Link>
+
           <button
             type="button"
             aria-label="Shopping cart"

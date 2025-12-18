@@ -89,12 +89,17 @@ export default function NewProducts() {
                   <h3 className="uppercase text-[13px] font-[550] tracking-wider text-gray-900">
                     {product.name}
                   </h3>
-                  <p className="text-sm font-[550] text-gray-700">
-                    <span className="text-[13px] font-[550] tracking-wider text-gray-900">
-                      ₺
-                    </span>{" "}
-                    {product.price}
-                  </p>
+                  {/* Fiyat */}
+                  <div className="flex items-end gap-x-5">
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-[13px] font-semibold tracking-wider">
+                        ₺
+                      </span>
+                      <span className="text-[14px] font-[Rubik] font-medium tracking-wider text-gray-900">
+                        {product.price},00
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </Link>
             ))
