@@ -40,7 +40,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-1">
                   <Link
                     href={`/kategori/${category.slug}`}
-                    className="transition-colors hover:text-gray-900"
+                    className="transition-colors hover:text-black"
                   >
                     {category.name}
                   </Link>
@@ -67,7 +67,7 @@ export default function Navbar() {
                           <li key={child._id}>
                             <Link
                               href={`/kategori/${child.slug}`}
-                              className="block px-4 py-3 text-[12px] font-[550] uppercase tracking-widest transition-colors hover:bg-gray-100 hover:text-gray-900"
+                              className="block px-4 py-3 text-[12px] font-[550] uppercase tracking-widest transition-colors hover:bg-gray-100 hover:text-black"
                             >
                               {child.name}
                             </Link>

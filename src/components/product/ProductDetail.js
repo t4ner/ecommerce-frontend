@@ -2,14 +2,34 @@
 
 import { useState, useMemo } from "react";
 import Image from "next/image";
+import { useAddToCart } from "@/hooks/cart/useAddToCart";
 
 export default function ProductDetail({ product }) {
   const [quantity, setQuantity] = useState(1);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const { mutate: addToCart, isPending: isAddingToCart } = useAddToCart();
+
   // Her ürün için 1-15 arasında rastgele sayı
   const randomCount = useMemo(() => {
     return Math.floor(Math.random() * 10) + 1;
   }, [product._id]);
+
+  const handleAddToCart = () => {
+    const productId = product._id || product.id;
+    if (!productId) {
+      console.error("Product ID bulunamadı:", product);
+      return;
+    }
+    const requestData = {
+      productId: productId,
+      quantity: Number(quantity),
+    };
+    console.log("Sepete ekleniyor:", requestData);
+    addToCart({
+      productData: requestData,
+      product: product,
+    });
+  };
   return (
     <div className="py-14">
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-16">
@@ -63,7 +83,7 @@ export default function ProductDetail({ product }) {
             </div>
 
             {/* Ürün Adı */}
-            <h1 className="text-[20px]  font-[550] text-gray-900 uppercase tracking-widest">
+            <h1 className="text-[20px]  font-[550] text-black uppercase tracking-widest">
               {product.name}
             </h1>
 
@@ -71,11 +91,11 @@ export default function ProductDetail({ product }) {
             <div className="flex items-end gap-x-5">
               <div className="flex items-baseline gap-1.5">
                 <span className="text-2xl font-medium tracking-wider">₺</span>
-                <span className="text-4xl font-[Rubik] font-light tracking-wide text-gray-900">
+                <span className="text-4xl font-[Rubik] font-light tracking-wide text-black">
                   {product.price}
                 </span>
                 <span className="text-xl font-[Merriweather] font-medium text-gray-600">
-                  . 00 
+                  . 00
                 </span>
               </div>
             </div>
@@ -85,15 +105,15 @@ export default function ProductDetail({ product }) {
               <label className="text-[11px] font-medium uppercase tracking-widest text-gray-500">
                 Adet
               </label>
-              <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden shadow-sm w-fit">
+              <div className="flex items-center gap-2 bg-gray-100 rounded-2xl p-1.5 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)] w-fit">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   disabled={quantity <= 1 || product.stock === 0}
-                  className="px-5 py-2 text-gray-700 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all duration-200 flex items-center justify-center min-w-[44px]"
+                  className="w-10 h-10 rounded-xl bg-white border border-gray-200/50 flex items-center justify-center text-gray-700 hover:bg-gray-50 hover:text-black disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white transition-all duration-200 shadow-[2px_2px_4px_rgba(0,0,0,0.1),-2px_-2px_4px_rgba(255,255,255,0.8)] active:shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]"
                   aria-label="Azalt"
                 >
                   <svg
-                    className="w-3 h-3"
+                    className="w-3.5 h-3.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -101,12 +121,12 @@ export default function ProductDetail({ product }) {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={2.5}
+                      strokeWidth={3}
                       d="M20 12H4"
                     />
                   </svg>
                 </button>
-                <div className="py-3 border-x border-gray-200 bg-white max-w-[80px]">
+                <div className="max-w-[70px] font-[Rubik] px-4 py-2 bg-white rounded-xl text-center shadow-[inset_1px_1px_2px_rgba(0,0,0,0.05)]">
                   <input
                     type="number"
                     value={quantity}
@@ -115,7 +135,7 @@ export default function ProductDetail({ product }) {
                       setQuantity(Math.max(1, val));
                     }}
                     disabled={product.stock === 0}
-                    className="w-full text-center text-[15px] tracking-wider font-medium text-gray-900 focus:outline-none focus:ring-0 bg-transparent disabled:opacity-50 disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    className="w-full text-center text-base font-medium text-black focus:outline-none focus:ring-0 bg-transparent disabled:opacity-50 disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     min="1"
                     aria-label="Adet"
                   />
@@ -123,11 +143,11 @@ export default function ProductDetail({ product }) {
                 <button
                   onClick={() => setQuantity(quantity + 1)}
                   disabled={product.stock === 0}
-                  className="px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-all duration-200 flex items-center justify-center min-w-[44px]"
+                  className="w-10 h-10 rounded-xl bg-white border border-gray-200/50 flex items-center justify-center text-gray-700 hover:bg-gray-50 hover:text-black disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white transition-all duration-200 shadow-[2px_2px_4px_rgba(0,0,0,0.1),-2px_-2px_4px_rgba(255,255,255,0.8)] active:shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]"
                   aria-label="Artır"
                 >
                   <svg
-                    className="w-3 h-3"
+                    className="w-3.5 h-3.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -135,7 +155,7 @@ export default function ProductDetail({ product }) {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={2.5}
+                      strokeWidth={3}
                       d="M12 4v16m8-8H4"
                     />
                   </svg>
@@ -159,9 +179,10 @@ export default function ProductDetail({ product }) {
             {/* Sepete Ekle Butonu */}
             <div className="pt-2">
               <button
-                disabled={product.stock === 0}
+                onClick={handleAddToCart}
+                disabled={product.stock === 0 || isAddingToCart}
                 className={`w-full py-4 px-6 uppercase tracking-widest text-[12px] font-[550] transition-all flex items-center justify-center gap-2 ${
-                  product.stock > 0
+                  product.stock > 0 && !isAddingToCart
                     ? "bg-black text-white hover:bg-gray-800 active:scale-95"
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
@@ -171,9 +192,15 @@ export default function ProductDetail({ product }) {
                   alt="Sepet"
                   width={20}
                   height={20}
-                  className={product.stock > 0 ? "invert" : ""}
+                  className={
+                    product.stock > 0 && !isAddingToCart ? "invert" : ""
+                  }
                 />
-                {product.stock > 0 ? "Sepete Ekle" : "Stokta Yok"}
+                {isAddingToCart
+                  ? "Ekleniyor..."
+                  : product.stock > 0
+                  ? "Sepete Ekle"
+                  : "Stokta Yok"}
               </button>
             </div>
 
@@ -227,7 +254,7 @@ export default function ProductDetail({ product }) {
                   className="w-full flex items-center justify-between bg-gray-100 py-4 hover:bg-gray-200 transition-colors duration-500"
                   aria-expanded={isDescriptionOpen}
                 >
-                  <h2 className="text-[11px] pl-5 font-[550] uppercase tracking-widest text-gray-900">
+                  <h2 className="text-[11px] pl-5 font-[550] uppercase tracking-widest text-black">
                     Ürün Açıklaması
                   </h2>
                   <Image
@@ -235,7 +262,7 @@ export default function ProductDetail({ product }) {
                     alt="arrow-down"
                     width={17}
                     height={17}
-                    className={`w-4 h-4 mr-5 text-gray-900 transition-transform duration-500 ${
+                    className={`w-4 h-4 mr-5 text-black transition-transform duration-500 ${
                       isDescriptionOpen ? "rotate-180" : ""
                     }`}
                   />

@@ -31,8 +31,7 @@ export default function ReactQueryProvider({ children }) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      {/* React Query DevTools - sadece development'ta görünür */}
-      <ReactQueryDevtools initialIsOpen={false} />
+    
     </QueryClientProvider>
   );
 }

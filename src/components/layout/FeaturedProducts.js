@@ -62,7 +62,7 @@ export default function FeaturedProducts() {
     <section>
       {/* Header */}
       <div className="flex items-center justify-between mb-10">
-        <h2 className="text-[14px] font-[550] uppercase tracking-widest">
+        <h2 className="text-[15px] font-[550] uppercase tracking-widest">
           Öne Çıkan Ürünler
         </h2>
 
@@ -72,9 +72,9 @@ export default function FeaturedProducts() {
               <button
                 key={category._id}
                 onClick={() => setSelectedCategory(category._id)}
-                className={`relative text-[13px] cursor-pointer font-[550] tracking-widest uppercase transition-colors after:absolute after:left-0 after:-bottom-1 after:h-0.25 after:bg-gray-900 after:transition-all ${
+                className={`relative text-[13px] cursor-pointer font-[550] tracking-widest uppercase transition-colors after:absolute after:left-0 after:-bottom-1 after:h-0.25 after:bg-black after:transition-all ${
                   selectedCategory === category._id
-                    ? "text-gray-900 after:w-full"
+                    ? "text-black after:w-full"
                     : "text-gray-400 hover:text-gray-700 after:w-0"
                 }`}
               >
@@ -125,16 +125,16 @@ export default function FeaturedProducts() {
 
                 {/* Info */}
                 <div className="flex flex-col gap-2 px-1">
-                  <h3 className="uppercase text-[13px] font-[550] tracking-wider text-gray-900">
+                  <h3 className="uppercase text-[13px] font-[550] tracking-wider text-black">
                     {product.name}
                   </h3>
-                    {/* Fiyat */}
-                    <div className="flex items-end gap-x-5">
+                  {/* Fiyat */}
+                  <div className="flex items-end gap-x-5">
                     <div className="flex items-baseline gap-1.5">
                       <span className="text-[13px] font-semibold tracking-wider">
                         ₺
                       </span>
-                      <span className="text-[14px] font-[Rubik] font-medium tracking-wider text-gray-900">
+                      <span className="text-[14px] font-[Rubik] font-medium tracking-wider text-black">
                         {product.price},00
                       </span>
                     </div>

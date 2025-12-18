@@ -41,7 +41,7 @@ export default function NewProducts() {
     <section>
       {/* Header */}
       <div className="flex items-center justify-between mb-10">
-        <h2 className="text-[14px] font-[550] uppercase tracking-widest text-gray-900">
+        <h2 className="text-[15px] font-[550] uppercase tracking-widest text-black">
           Yeni Ürünler
         </h2>
       </div>
@@ -86,7 +86,7 @@ export default function NewProducts() {
 
                 {/* Info */}
                 <div className="flex flex-col gap-2 px-1">
-                  <h3 className="uppercase text-[13px] font-[550] tracking-wider text-gray-900">
+                  <h3 className="uppercase text-[13px] font-[550] tracking-wider text-black">
                     {product.name}
                   </h3>
                   {/* Fiyat */}
@@ -95,7 +95,7 @@ export default function NewProducts() {
                       <span className="text-[13px] font-semibold tracking-wider">
                         ₺
                       </span>
-                      <span className="text-[14px] font-[Rubik] font-medium tracking-wider text-gray-900">
+                      <span className="text-[14px] font-[Rubik] font-medium tracking-wider text-black">
                         {product.price},00
                       </span>
                     </div>

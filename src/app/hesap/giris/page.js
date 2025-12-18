@@ -1,8 +1,34 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { useLogin } from "@/hooks/auth/useLogin";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { mutate: login, isPending, error } = useLogin();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(
+      { email, password },
+      {
+        onSuccess: () => {
+          // Başarılı giriş - error state'i otomatik temizlenir
+        },
+        onError: (err) => {
+          // Hata durumunda error state'i otomatik set edilir
+        },
+      }
+    );
+  };
+
+  const errorMessage =
+    error?.response?.data?.message ||
+    error?.response?.data?.data?.message ||
+    "Hatalı Giriş. Lütfen Tekrar Deneyiniz.";
+
   return (
     <div className=" flex items-center justify-center py-20">
       <div className="bg-white border border-gray-400 rounded-lg shadow-sm w-full max-w-2xl p-8">
@@ -29,15 +55,25 @@ export default function LoginPage() {
           </Link>
         </div>
 
+        {/* Error Message */}
+        {error && (
+          <div className="mb-4 p-4 bg-red-50 border border-red-200 uppercase tracking-widest font-medium rounded-lg">
+            <p className="text-red-600 text-[10px]">{errorMessage}</p>
+          </div>
+        )}
+
         {/* Login Form */}
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Email Input */}
           <div>
             <input
               type="email"
               placeholder="E-POSTA"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 font-[450] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-400 placeholder:text-[11px]  placeholder:tracking-widest"
               required
+              disabled={isPending}
             />
           </div>
 
@@ -46,8 +82,11 @@ export default function LoginPage() {
             <input
               type="password"
               placeholder="ŞİFRE"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 font-[450] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-400 placeholder:text-[11px]  placeholder:tracking-widest"
               required
+              disabled={isPending}
             />
           </div>
 
@@ -55,9 +94,10 @@ export default function LoginPage() {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full py-4 px-6 uppercase tracking-widest text-[12px] font-[550] transition-all flex items-center justify-center gap-2 bg-black text-white hover:bg-gray-800 active:scale-95"
+              disabled={isPending}
+              className="w-full py-4 px-6 uppercase tracking-widest text-[12px] font-[550] transition-all flex items-center justify-center gap-2 bg-black text-white hover:bg-gray-800 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Giriş yap
+              {isPending ? "Giriş yapılıyor..." : "Giriş yap"}
             </button>
           </div>
         </form>

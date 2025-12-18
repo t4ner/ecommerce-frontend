@@ -46,7 +46,7 @@ export default function Categories() {
   return (
     <section>
       {/* Title */}
-      <h2 className="text-[14px] font-[550] uppercase tracking-widest mb-10">
+      <h2 className="text-[15px] font-[550] uppercase tracking-widest mb-10">
         Kategoriler
       </h2>
 
@@ -83,7 +83,7 @@ export default function Categories() {
               </div>
 
               {/* Category Name */}
-              <span className="mt-5 border border-gray-200 py-2 px-5 rounded-lg text-center text-[12px] font-[550] uppercase tracking-widest text-gray-900">
+              <span className="mt-5 border border-gray-200 py-2 px-5 rounded-lg text-center text-[12px] font-[550] uppercase tracking-widest text-black">
                 {category.name}
               </span>
             </Link>

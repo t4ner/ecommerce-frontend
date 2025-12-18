@@ -1,7 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useCart } from "@/hooks/cart/useCart";
+import { useCartSidebarStore } from "@/stores/cartNotificationStore";
 
 export default function Header() {
+  const { data: cart } = useCart();
+  const { openSidebar } = useCartSidebarStore();
+  const cartItemCount = cart?.itemCount || cart?.cart?.items?.length || 0;
+
   return (
     <header className="container mx-auto">
       <div className="flex items-center justify-between py-3">
@@ -50,9 +58,9 @@ export default function Header() {
           </Link>
 
           <button
-            type="button"
+            onClick={openSidebar}
+            className="relative cursor-pointer"
             aria-label="Shopping cart"
-            className="cursor-pointer"
           >
             <Image
               src="/images/icons/basket.svg"
@@ -60,6 +68,11 @@ export default function Header() {
               width={25}
               height={25}
             />
+            {cartItemCount > 0 && (
+              <span className="absolute font-[Rubik] -top-2 -right-2 bg-black text-white text-[10px] font-medium rounded-full w-5 h-5 flex items-center justify-center">
+                {cartItemCount > 9 ? "9+" : cartItemCount}
+              </span>
+            )}
           </button>
         </div>
       </div>

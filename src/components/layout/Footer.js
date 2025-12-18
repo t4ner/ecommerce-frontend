@@ -24,7 +24,6 @@ export default function Footer() {
   return (
     <footer className="pt-14 bg-black text-white">
       <div className="container mx-auto">
-
         {/* Second Row - Categories */}
         <div className="flex flex-wrap items-center justify-center gap-4 py-4 border-t border-gray-400">
           {mainCategories && mainCategories.length > 0 ? (
@@ -32,7 +31,7 @@ export default function Footer() {
               <span key={category._id} className="flex items-center">
                 <Link
                   href={`/kategori/${category.slug}`}
-                  className="text-[11px] font-[550] uppercase tracking-widest transition-colors hover:text-gray-900"
+                  className="text-[11px] font-[550] uppercase tracking-widest transition-colors hover:text-black"
                 >
                   {category.name}
                 </Link>
@@ -66,7 +65,7 @@ export default function Footer() {
             <span key={link.name} className="flex items-center">
               <Link
                 href={link.href}
-                className="text-[11px] font-[550] uppercase tracking-widest transition-colors hover:text-gray-900"
+                className="text-[11px] font-[550] uppercase tracking-widest transition-colors hover:text-black"
               >
                 {link.name}
               </Link>
@@ -76,7 +75,6 @@ export default function Footer() {
             </span>
           ))}
         </div>
-
 
         {/* Bottom Section - Logo, Attribution, Social */}
         <div className="pt-10">

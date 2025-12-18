@@ -22,7 +22,7 @@ export default function CategoryProducts({ categorySlug }) {
   if (isError) {
     return (
       <div className="py-24 text-center min-h-[60vh]">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">
+        <h1 className="text-2xl font-bold text-black mb-4">
           Ürünler Yüklenemedi
         </h1>
         <p className="text-sm text-gray-500">
@@ -35,12 +35,9 @@ export default function CategoryProducts({ categorySlug }) {
   if (!products || products.length === 0) {
     return (
       <div className="py-24 text-center min-h-[60vh]">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          Bu Kategoride Ürün Bulunamadı
-        </h1>
-        <p className="text-sm text-gray-500">
-          Bu kategoride henüz ürün bulunmamaktadır.
-        </p>
+        <h2 className="text-[14px] font-[550] uppercase tracking-widest text-black mb-4">
+          Bu Kategoride Henüz Ürün Bulunmuyor
+        </h2>
       </div>
     );
   }
@@ -51,7 +48,7 @@ export default function CategoryProducts({ categorySlug }) {
     <div className="py-14">
       {/* Kategori Başlığı */}
       <div className="mb-10">
-        <h1 className="text-[13px] font-[550] uppercase tracking-widest text-gray-900 mb-2">
+        <h1 className="text-[14px] font-[550] uppercase tracking-widest text-black mb-2">
           {categoryName}
         </h1>
       </div>
@@ -94,20 +91,20 @@ export default function CategoryProducts({ categorySlug }) {
 
             {/* Info */}
             <div className="flex flex-col gap-2 px-1">
-              <h3 className="uppercase text-[13px] font-[550] tracking-widest text-gray-900 line-clamp-2">
+              <h3 className="uppercase text-[13px] font-[550] tracking-widest text-black line-clamp-2">
                 {product.name}
               </h3>
-            {/* Fiyat */}
-            <div className="flex items-end gap-x-5">
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-[13px] font-semibold tracking-wider">
-                        ₺
-                      </span>
-                      <span className="text-[14px] font-[Rubik] font-medium tracking-wider text-gray-900">
-                        {product.price},00
-                      </span>
-                    </div>
-                  </div>
+              {/* Fiyat */}
+              <div className="flex items-end gap-x-5">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-[13px] font-semibold tracking-wider">
+                    ₺
+                  </span>
+                  <span className="text-[14px] font-[Rubik] font-medium tracking-wider text-black">
+                    {product.price},00
+                  </span>
+                </div>
+              </div>
             </div>
           </Link>
         ))}

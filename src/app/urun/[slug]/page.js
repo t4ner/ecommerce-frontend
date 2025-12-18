@@ -19,9 +19,7 @@ export default function ProductPage({ params }) {
   if (isError || !product) {
     return (
       <div className="py-24 text-center min-h-[60vh]">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          Ürün Bulunamadı
-        </h1>
+        <h1 className="text-2xl font-bold text-black mb-4">Ürün Bulunamadı</h1>
         <p className="text-sm text-gray-500">
           Aradığınız ürün bulunamadı veya yüklenirken bir hata oluştu.
         </p>

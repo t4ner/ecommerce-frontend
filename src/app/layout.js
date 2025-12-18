@@ -10,6 +10,8 @@ import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
 import TopBar from "@/components/layout/TopBar";
 import Footer from "@/components/layout/Footer";
+import CartSidebar from "@/components/cart/CartSidebar";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -53,7 +55,6 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="tr">
@@ -61,11 +62,13 @@ export default function RootLayout({ children }) {
         className={`${ibmPlexSans.variable} ${raleway.variable} ${rubik.variable} ${merriweather.variable} ${ibmPlexSansThaiLooped.variable} font-[Montserrat]`}
       >
         <ReactQueryProvider>
+          <ScrollToTop />
           <TopBar />
           <Header />
           <Navbar />
           <main className="container mx-auto">{children}</main>
           <Footer />
+          <CartSidebar />
         </ReactQueryProvider>
       </body>
     </html>
