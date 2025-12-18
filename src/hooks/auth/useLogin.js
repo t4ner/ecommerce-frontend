@@ -14,8 +14,10 @@ export const useLogin = () => {
     onSuccess: (response) => {
       console.log("Login success response:", response);
       if (response.data?.data?.accessToken) {
-        localStorage.setItem("token", response.data.data.accessToken);
-        console.log("Token saved successfully");
+        // Access token'ı localStorage'a kaydet
+        // Refresh token otomatik olarak cookie'ye kaydedilir (httpOnly)
+        localStorage.setItem("accessToken", response.data.data.accessToken);
+        console.log("Access token saved successfully");
       } else {
         console.log("No accessToken found in response:", response.data);
       }

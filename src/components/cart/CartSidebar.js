@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useCartSidebarStore } from "@/stores/cartNotificationStore";
 import { useCart } from "@/hooks/cart/useCart";
 import { useUpdateCartItem } from "@/hooks/cart/useUpdateCartItem";
@@ -9,11 +10,22 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function CartSidebar() {
+  const [isMounted, setIsMounted] = useState(false);
   const { isOpen, closeSidebar } = useCartSidebarStore();
   const { data: cart, isLoading } = useCart();
   const { mutate: updateCartItem, isPending: isUpdating } = useUpdateCartItem();
   const { mutate: removeFromCart, isPending: isRemoving } = useRemoveFromCart();
   const router = useRouter();
+
+  // Hydration mismatch'i önlemek için client-side mount kontrolü
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Server-side render sırasında hiçbir şey render etme
+  if (!isMounted) {
+    return null;
+  }
 
   const cartItems = cart?.cart?.items || [];
   const totalPrice = parseFloat(cart?.total || 0);
@@ -161,6 +173,7 @@ export default function CartSidebar() {
                           }
                           alt={item.product.name}
                           fill
+                          sizes="80px"
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                       </Link>

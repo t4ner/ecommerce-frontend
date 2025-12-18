@@ -89,7 +89,7 @@ export default function FeaturedProducts() {
       <div className="relative">
         <div key={sliderKey} ref={sliderRef} className="keen-slider pb-4">
           {filteredProducts?.length ? (
-            filteredProducts.map((product) => (
+            filteredProducts.map((product, index) => (
               <Link
                 key={product._id}
                 href={`/urun/${product.slug}`}
@@ -103,15 +103,18 @@ export default function FeaturedProducts() {
                         src={product.images[0]}
                         alt={product.name}
                         fill
+                        sizes="350px"
                         className={`object-cover p-3 transition-opacity duration-500 ${
                           product.images?.[1] ? "group-hover:opacity-0" : ""
                         }`}
+                        loading="lazy"
                       />
                       {product.images?.[1] && (
                         <Image
                           src={product.images[1]}
                           alt={product.name}
                           fill
+                          sizes="350px"
                           className="object-cover p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                         />
                       )}
@@ -125,7 +128,7 @@ export default function FeaturedProducts() {
 
                 {/* Info */}
                 <div className="flex flex-col gap-2 px-1">
-                  <h3 className="uppercase text-[13px] font-[550] tracking-wider text-black">
+                  <h3 className="uppercase text-[13px] font-[550] tracking-widest text-black">
                     {product.name}
                   </h3>
                   {/* Fiyat */}

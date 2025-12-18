@@ -11,13 +11,13 @@ export const useRegister = () => {
 
   return useMutation({
     mutationFn: (userData) => register(userData),
-    onSuccess: (response) => {;
-
-      // accessToken'ı localStorage'a kaydet
+    onSuccess: (response) => {
+      // Access token'ı localStorage'a kaydet
+      // Refresh token otomatik olarak cookie'ye kaydedilir (httpOnly)
       if (response.data?.data?.accessToken) {
-        localStorage.setItem("token", response.data.data.accessToken);
+        localStorage.setItem("accessToken", response.data.data.accessToken);
         console.log(
-          "Token saved to localStorage:",
+          "Access token saved to localStorage:",
           response.data.data.accessToken
         );
       } else {

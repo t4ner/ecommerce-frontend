@@ -2,16 +2,32 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "http://localhost:5858/api",
-  withCredentials: false, // Cookie kullanmıyoruz, token header ile gönderiliyor
+  withCredentials: true, // Cookie'ler için gerekli (refreshToken httpOnly cookie'de)
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// Request interceptor - Token ekleme
+// Refresh token mekanizması için state
+let isRefreshing = false;
+let failedQueue = [];
+
+// Queue'daki request'leri işle
+const processQueue = (error, token = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+};
+
+// Request interceptor - Access token ekleme
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -22,15 +38,98 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor - Hata yönetimi
+// Response interceptor - 401 hatası ve refresh token mekanizması
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
-    // 401 Unauthorized - Token geçersiz veya süresi dolmuş
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      // Gerekirse login sayfasına yönlendirme yapılabilir
+  async (error) => {
+    const originalRequest = error.config;
+    const requestUrl = originalRequest?.url || "";
+    const fullUrl = originalRequest?.baseURL
+      ? `${originalRequest.baseURL}${requestUrl}`
+      : requestUrl;
+
+    // Login sayfasındaysak refresh deneme
+    if (typeof window !== "undefined") {
+      const currentPath = window.location.pathname;
+      if (currentPath === "/hesap/giris" || currentPath === "/hesap/kayit") {
+        return Promise.reject(error);
+      }
     }
+
+    // Refresh endpoint'ine istek atıyorsak veya zaten retry edilmişse, sonsuz döngüyü önle
+    if (
+      requestUrl.includes("/auth/refresh") ||
+      fullUrl.includes("/auth/refresh") ||
+      originalRequest._retry ||
+      originalRequest._skipRefresh
+    ) {
+      return Promise.reject(error);
+    }
+
+    // 401 hatası ve daha önce retry edilmemişse
+    if (error.response?.status === 401) {
+      // Eğer refresh işlemi devam ediyorsa, queue'ya ekle
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            return api(originalRequest);
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
+      }
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      try {
+        // Refresh token endpoint'ine istek at (cookie otomatik gönderilir)
+        // Doğrudan axios kullanarak interceptor'a takılmadan istek atıyoruz
+        // Yeni bir axios instance oluşturuyoruz ki interceptor'lara takılmasın
+        const refreshAxios = axios.create({
+          baseURL: api.defaults.baseURL,
+          withCredentials: true,
+        });
+
+        const response = await refreshAxios.get("/auth/refresh");
+
+        const newAccessToken = response.data?.data?.accessToken;
+
+        if (newAccessToken) {
+          // Yeni access token'ı localStorage'a kaydet
+          localStorage.setItem("accessToken", newAccessToken);
+
+          // Queue'daki tüm request'leri yeni token ile işle
+          processQueue(null, newAccessToken);
+
+          // Orijinal request'i yeni token ile tekrar dene
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+          isRefreshing = false;
+          return api(originalRequest);
+        } else {
+          throw new Error("No access token in refresh response");
+        }
+      } catch (refreshError) {
+        // Refresh başarısız oldu
+        processQueue(refreshError, null);
+        isRefreshing = false;
+
+        // Token'ları temizle
+        localStorage.removeItem("accessToken");
+
+        // Login sayfasına yönlendir (sadece bir kez)
+        if (typeof window !== "undefined" && !window._redirectingToLogin) {
+          window._redirectingToLogin = true;
+          window.location.href = "/hesap/giris";
+        }
+
+        return Promise.reject(refreshError);
+      }
+    }
+
     return Promise.reject(error);
   }
 );

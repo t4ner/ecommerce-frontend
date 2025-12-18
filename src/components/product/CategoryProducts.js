@@ -69,6 +69,7 @@ export default function CategoryProducts({ categorySlug }) {
                     src={product.images[0]}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className={`object-cover p-3 transition-opacity duration-500 ${
                       product.images?.[1] ? "group-hover:opacity-0" : ""
                     }`}
@@ -78,6 +79,7 @@ export default function CategoryProducts({ categorySlug }) {
                       src={product.images[1]}
                       alt={product.name}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       className="object-cover p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     />
                   )}

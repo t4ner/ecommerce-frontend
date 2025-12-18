@@ -68,6 +68,7 @@ export default function Categories() {
                   width={224}
                   height={224}
                   className="absolute inset-0 w-full h-full object-contain opacity-100"
+                  style={{ width: "auto", height: "auto" }}
                 />
 
                 {/* Category Image - Üstteki görsel */}
@@ -78,6 +79,7 @@ export default function Categories() {
                     width={200}
                     height={180}
                     className="relative z-10 object-contain transition-transform duration-300 group-hover:scale-110"
+                    style={{ width: "auto", height: "auto" }}
                   />
                 ) : null}
               </div>

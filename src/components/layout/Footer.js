@@ -8,9 +8,10 @@ export default function Footer() {
   const { data: categories } = useCategories();
 
   // Ana kategorileri al (parentId: null olanlar)
-  const mainCategories = categories
-    ?.filter((category) => category.parentId === null)
-    // İlk 5 kategoriyi al
+  const mainCategories = categories?.filter(
+    (category) => category.parentId === null
+  );
+  // İlk 5 kategoriyi al
 
   const legalLinks = [
     { name: "HAKKIMIZDA", href: "/hakkimizda" },
@@ -88,6 +89,7 @@ export default function Footer() {
                   width={80}
                   height={80}
                   loading="lazy"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </Link>
             </div>

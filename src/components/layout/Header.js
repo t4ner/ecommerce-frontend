@@ -23,6 +23,7 @@ export default function Header() {
               height={100}
               loading="eager"
               priority
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
         </div>
@@ -54,6 +55,7 @@ export default function Header() {
               alt="profile"
               width={25}
               height={25}
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
 

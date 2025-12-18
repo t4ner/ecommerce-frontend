@@ -44,8 +44,9 @@ export default function Banner() {
         className="flex transition-transform duration-700 ease-in-out h-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {banners.map((banner) => {
+        {banners.map((banner, index) => {
           const hasSlug = banner.slug?.trim();
+          const isFirstBanner = index === 0;
           return (
             <div key={banner._id} className="w-full shrink-0 relative">
               {hasSlug ? (
@@ -59,6 +60,8 @@ export default function Banner() {
                     width={1000}
                     height={1000}
                     className="w-full h-full object-cover"
+                    loading={isFirstBanner ? "eager" : "lazy"}
+                    priority={isFirstBanner}
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
                 </Link>
@@ -70,6 +73,8 @@ export default function Banner() {
                     width={1000}
                     height={1000}
                     className="w-full h-full object-cover"
+                    loading={isFirstBanner ? "eager" : "lazy"}
+                    priority={isFirstBanner}
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
                   {banner.title && (

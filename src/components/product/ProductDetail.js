@@ -46,6 +46,7 @@ export default function ProductDetail({ product }) {
                   src={image}
                   alt={`${product.name} - Görsel ${index + 1}`}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover p-6 transition-transform duration-500 ease-in-out group-hover:scale-125"
                   priority={index === 0}
                 />
@@ -265,6 +266,7 @@ export default function ProductDetail({ product }) {
                     className={`w-4 h-4 mr-5 text-black transition-transform duration-500 ${
                       isDescriptionOpen ? "rotate-180" : ""
                     }`}
+                   
                   />
                 </button>
                 <div
