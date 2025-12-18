@@ -26,7 +26,7 @@ export default function Navbar() {
       ) : isError ? (
         <div className="text-sm text-red-500">Hata oluştu</div>
       ) : (
-        <ul className="flex items-center gap-20 text-[12px] font-[550] uppercase tracking-widest">
+        <ul className="flex items-center gap-20 text-[13px] font-[550] uppercase tracking-widest">
           {visibleCategories && visibleCategories.length > 0 ? (
             visibleCategories.map((category) => (
               <li

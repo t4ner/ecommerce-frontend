@@ -5,6 +5,7 @@ import Image from "next/image";
 
 export default function ProductDetail({ product }) {
   const [quantity, setQuantity] = useState(1);
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   // Her ürün için 1-15 arasında rastgele sayı
   const randomCount = useMemo(() => {
     return Math.floor(Math.random() * 10) + 1;
@@ -45,7 +46,7 @@ export default function ProductDetail({ product }) {
             {/* Kategori */}
             <div className="flex items-center gap-2">
               {product.category && (
-                <div className="text-[14px] font-[550] uppercase tracking-widest text-gray-500">
+                <div className="text-[12px] font-medium uppercase tracking-widest text-gray-500">
                   {product.category.name}
                 </div>
               )}
@@ -62,7 +63,7 @@ export default function ProductDetail({ product }) {
             </div>
 
             {/* Ürün Adı */}
-            <h1 className="text-[20px] font-[550] text-gray-900 uppercase tracking-wider">
+            <h1 className="text-[20px] font-[550] text-gray-900 uppercase tracking-widest">
               {product.name}
             </h1>
 
@@ -81,7 +82,7 @@ export default function ProductDetail({ product }) {
 
             {/* Quantity Selector */}
             <div className="flex flex-col gap-2">
-              <label className="text-[12px] font-[550] uppercase tracking-widest text-gray-500">
+              <label className="text-[11px] font-medium uppercase tracking-widest text-gray-500">
                 Adet
               </label>
               <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden shadow-sm w-fit">
@@ -105,7 +106,7 @@ export default function ProductDetail({ product }) {
                     />
                   </svg>
                 </button>
-                <div className="py-3 border-x border-gray-200 bg-white max-w-[100px]">
+                <div className="py-3 border-x border-gray-200 bg-white max-w-[80px]">
                   <input
                     type="number"
                     value={quantity}
@@ -114,7 +115,7 @@ export default function ProductDetail({ product }) {
                       setQuantity(Math.max(1, val));
                     }}
                     disabled={product.stock === 0}
-                    className="w-full text-center text-[15px] font-[550] text-gray-900 focus:outline-none focus:ring-0 bg-transparent disabled:opacity-50 disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    className="w-full text-center text-[15px] tracking-wider font-medium text-gray-900 focus:outline-none focus:ring-0 bg-transparent disabled:opacity-50 disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     min="1"
                     aria-label="Adet"
                   />
@@ -150,7 +151,7 @@ export default function ProductDetail({ product }) {
                 width={20}
                 height={20}
               />
-              <span className="text-[11px] font-[550] tracking-widest uppercase tex0">
+              <span className="text-[11px] font-medium tracking-widest text-gray-500 uppercase tex0">
                 Bu ürünü bugün {randomCount} kişi sepetine ekledi.
               </span>
             </div>
@@ -187,10 +188,10 @@ export default function ProductDetail({ product }) {
                   height={22}
                 />
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-[11px] font-[550] uppercase tracking-widest ">
+                  <h3 className="text-[11px] font-medium uppercase tracking-widest ">
                     Ücretsiz Kargo
                   </h3>
-                  <p className="text-[10px] font-[550] tracking-widest uppercase text-gray-400">
+                  <p className="text-[10px] font-medium tracking-widest uppercase text-gray-500">
                     1500₺ ve üzeri siparişlerde ücretsiz standart kargo
                   </p>
                 </div>
@@ -208,10 +209,10 @@ export default function ProductDetail({ product }) {
                   height={22}
                 />
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-[11px] font-[550] uppercase tracking-widest ">
+                  <h3 className="text-[11px] font-medium uppercase tracking-widest ">
                     %100 güvenli ödeme
                   </h3>
-                  <p className="text-[10px] font-[550] tracking-widest uppercase text-gray-400">
+                  <p className="text-[10px] font-medium tracking-widest uppercase text-gray-500">
                     güvenli alışveriş deneyimi için
                   </p>
                 </div>
@@ -221,13 +222,37 @@ export default function ProductDetail({ product }) {
             {/* Açıklama */}
             {product.description && (
               <div className="pt-6 border-t border-gray-200">
-                <h2 className="text-[12px] font-[550] uppercase tracking-widest text-gray-500 mb-3">
-                  Açıklama
-                </h2>
-
-                <p className="text-[10px] font-[550] tracking-widest leading-5 text-justify uppercase text-gray-400">
-                  {product.description}
-                </p>
+                <button
+                  onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+                  className="w-full flex items-center justify-between bg-gray-100 py-3 hover:bg-gray-200 transition-colors duration-200"
+                  aria-expanded={isDescriptionOpen}
+                >
+                  <h2 className="text-[11px] pl-5 font-[550] uppercase tracking-widest text-gray-900">
+                    Ürün Açıklaması
+                  </h2>
+                  <Image
+                    src="/images/icons/arrow-bottom.svg"
+                    alt="arrow-down"
+                    width={20}
+                    height={20}
+                    className={`w-5 h-5 mr-2 text-gray-900 transition-transform duration-300 ${
+                      isDescriptionOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isDescriptionOpen
+                      ? "max-h-[500px] opacity-100"
+                      : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="bg-white px-1 py-4 border-t border-gray-200">
+                    <p className="text-[11px] font-[Prompt] uppercase  tracking-wider leading-5 text-gray-500">
+                      {product.description}
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
           </div>

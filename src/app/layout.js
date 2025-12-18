@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import { Montserrat } from "next/font/google";
 import { Poppins } from "next/font/google";
-import { Inter } from "next/font/google"; 
+import { Prompt } from "next/font/google";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
@@ -20,17 +20,12 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-inter",
-});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="tr">
       <body
-        className={`${montserrat.variable} ${poppins.variable} ${inter.variable} font-[Montserrat]`}
+        className={`${montserrat.variable} ${poppins.variable} font-[Montserrat]`}
       >
         <ReactQueryProvider>
           <TopBar />
