@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function RegisterPage() {
   return (
     <div className=" flex items-center justify-center py-20">
-      <div className="bg-white border rounded-lg shadow-sm w-full max-w-2xl p-8">
+      <div className="bg-white border border-gray-400 rounded-lg shadow-sm w-full max-w-2xl p-8">
         {/* Brand Name */}
         <div className="text-center mb-8">
           <h1 className="text-2xl  uppercase tracking-widest text-[20px] font-[550] text-black">
