@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -6,14 +7,16 @@ export default function Header() {
       <div className="flex items-center justify-between py-3">
         {/* Logo */}
         <div>
-          <Image
-            src="/images/logo/logo.webp"
-            alt="logo"
-            width={100}
-            height={100}
-            loading="eager"
-            priority
-          />
+          <Link href="/">
+            <Image
+              src="/images/logo/logo.webp"
+              alt="logo"
+              width={100}
+              height={100}
+              loading="eager"
+              priority
+            />
+          </Link>
         </div>
 
         {/* Search Bar */}

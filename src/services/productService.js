@@ -12,3 +12,19 @@ export const getFeaturedProducts = () =>
  * @returns {Promise} API response
  */
 export const getAllProducts = () => api.get("/products/getAllProducts");
+
+/**
+ * Slug'a göre tek bir ürün getir
+ * @param {string} slug - Ürün slug'ı
+ * @returns {Promise} API response
+ */
+export const getProductBySlug = (slug) =>
+  api.get(`/products/getProductBySlug/${slug}`);
+
+/**
+ * Kategori slug'ına göre ürünleri getir
+ * @param {string} slug - Kategori slug'ı
+ * @returns {Promise} API response
+ */
+export const getProductsByCategorySlug = (slug) =>
+  api.get(`/products/getProductsByCategorySlug/${slug}`);
