@@ -23,7 +23,7 @@ export default function RegisterPage() {
           </Link>
           <button
             type="button"
-            className="flex-1 py-4 px-4 uppercase tracking-widest text-[12px] font-[550] transition-all bg-gray-900 text-white"
+            className="flex-1 py-4 px-4 uppercase tracking-widest text-[12px] font-[550] transition-all bg-black text-white"
           >
             Üye Ol
           </button>
@@ -56,7 +56,7 @@ export default function RegisterPage() {
             <input
               type="password"
               placeholder="ŞİFRE"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-400 placeholder:text-[11px]  placeholder:tracking-widest"
+              className="w-full px-4 py-3 font-[450] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-400 placeholder:text-[11px]  placeholder:tracking-widest"
               required
             />
           </div>
@@ -66,7 +66,7 @@ export default function RegisterPage() {
             <input
               type="password"
               placeholder="ŞİFRE TEKRAR"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-400 placeholder:text-[11px]  placeholder:tracking-widest"
+              className="w-full px-4 py-3 font-[450] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-400 placeholder:text-[11px]  placeholder:tracking-widest"
               required
             />
           </div>
@@ -75,7 +75,7 @@ export default function RegisterPage() {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full py-4 px-6 uppercase tracking-widest text-[12px] font-[550] transition-all flex items-center justify-center gap-2 bg-gray-900 text-white hover:bg-gray-800 active:scale-95"
+              className="w-full py-4 px-6 uppercase tracking-widest text-[12px] font-[550] transition-all flex items-center justify-center gap-2 bg-black text-white hover:bg-gray-800 active:scale-95"
             >
               Üye Ol
             </button>

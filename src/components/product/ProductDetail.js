@@ -70,11 +70,11 @@ export default function ProductDetail({ product }) {
             {/* Fiyat */}
             <div className="flex items-end gap-x-5">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl font-semibol tracking-wider">₺</span>
+                <span className="text-2xl font-medium tracking-wider">₺</span>
                 <span className="text-4xl font-[Rubik] font-light tracking-wide text-gray-900">
                   {product.price}
                 </span>
-                <span className="text-xl font-[Merriweather] font-light text-gray-600">
+                <span className="text-xl font-[Merriweather] font-medium text-gray-600">
                   . 00 
                 </span>
               </div>
@@ -162,7 +162,7 @@ export default function ProductDetail({ product }) {
                 disabled={product.stock === 0}
                 className={`w-full py-4 px-6 uppercase tracking-widest text-[12px] font-[550] transition-all flex items-center justify-center gap-2 ${
                   product.stock > 0
-                    ? "bg-gray-900 text-white hover:bg-gray-800 active:scale-95"
+                    ? "bg-black text-white hover:bg-gray-800 active:scale-95"
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
               >
