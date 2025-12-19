@@ -12,7 +12,14 @@ export const login = (credentials) => api.post("/auth/login", credentials);
  * @param {Object} userData - Kullanıcı bilgileri { name, email, password }
  * @returns {Promise} API response
  */
-export const register = (userData) => api.post("/auth/register", userData);
+export const register = (userData) => {
+  // Role'ü otomatik olarak "user" olarak ekle
+  const dataWithRole = {
+    ...userData,
+    role: "user",
+  };
+  return api.post("/auth/register", dataWithRole);
+};
 
 /**
  * Refresh token kullanarak yeni access token al
