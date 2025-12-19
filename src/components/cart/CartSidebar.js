@@ -111,19 +111,7 @@ export default function CartSidebar() {
             <div className="text-center py-24">
               <div className="mb-8 flex justify-center">
                 <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center">
-                  <svg
-                    className="w-12 h-12 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                    />
-                  </svg>
+                <Image src="/images/icons/basket.svg" alt="Sepet Boş" width={40} height={40} />
                 </div>
               </div>
               <p className="text-[13px] font-[550] uppercase tracking-widest text-black mb-7">

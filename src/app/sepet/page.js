@@ -64,20 +64,8 @@ export default function CartPage() {
 
         {cartItems.length === 0 ? (
           <div className="text-center py-20">
-            <div className="mb-6">
-              <svg
-                className="w-16 h-16 mx-auto text-gray-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                />
-              </svg>
+            <div className="mb-6 flex justify-center">
+            <Image src="/images/icons/basket.svg" alt="Sepet Boş" width={40} height={40} />
             </div>
             <p className="text-[13px] font-[550] uppercase tracking-widest text-black mb-4">
               Sepetiniz boş
