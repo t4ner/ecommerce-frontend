@@ -1,6 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { logout } from "@/services/authService";
+import { useAuthStore } from "@/stores/authStore";
 
 /**
  * Kullanıcı çıkışı için mutation hook
@@ -8,28 +9,26 @@ import { logout } from "@/services/authService";
  */
 export const useLogout = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const clearAuth = useAuthStore((state) => state.clearAuth);
 
   return useMutation({
     mutationFn: () => logout(),
     onSuccess: () => {
-      // Access token'ı localStorage'dan temizle
-      localStorage.removeItem("accessToken");
-      // Kullanıcı bilgilerini localStorage'dan temizle
-      localStorage.removeItem("user");
+      // Zustand store'u temizle
+      clearAuth();
+      // Sadece frontend sepet cache'ini temizle (backend'de sepet kalır)
+      queryClient.removeQueries({ queryKey: ["cart"] });
       // Refresh token cookie'de, backend logout endpoint'i temizler
-      console.log("Logout successful");
-      // Auth değişikliğini bildir
-      window.dispatchEvent(new Event("auth-change"));
+      console.log("Logout successful, frontend cart cache cleared");
       // Login sayfasına yönlendir
       router.push("/hesap/giris");
     },
     onError: (error) => {
       console.error("Logout error:", error);
-      // Hata olsa bile token'ları temizle ve yönlendir
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("user");
-      // Auth değişikliğini bildir
-      window.dispatchEvent(new Event("auth-change"));
+      // Hata olsa bile store'u temizle, sepet cache'ini temizle ve yönlendir
+      clearAuth();
+      queryClient.removeQueries({ queryKey: ["cart"] });
       router.push("/hesap/giris");
     },
   });

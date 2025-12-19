@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuthStore } from "@/stores/authStore";
 
 const api = axios.create({
   baseURL: "http://localhost:5858/api",
@@ -7,6 +8,14 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+// Zustand store'a erişim helper
+const getAuthStore = () => {
+  if (typeof window !== "undefined") {
+    return useAuthStore.getState();
+  }
+  return null;
+};
 
 // Refresh token mekanizması için state
 let isRefreshing = false;
@@ -27,7 +36,9 @@ const processQueue = (error, token = null) => {
 // Request interceptor - Access token ekleme
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("accessToken");
+    // Zustand store'dan token al
+    const store = getAuthStore();
+    const token = store?.accessToken || localStorage.getItem("accessToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -99,8 +110,14 @@ api.interceptors.response.use(
         const newAccessToken = response.data?.data?.accessToken;
 
         if (newAccessToken) {
-          // Yeni access token'ı localStorage'a kaydet
-          localStorage.setItem("accessToken", newAccessToken);
+          // Zustand store'u güncelle
+          const store = getAuthStore();
+          if (store?.updateToken) {
+            store.updateToken(newAccessToken);
+          } else {
+            // Fallback: localStorage'a kaydet
+            localStorage.setItem("accessToken", newAccessToken);
+          }
 
           // Queue'daki tüm request'leri yeni token ile işle
           processQueue(null, newAccessToken);
@@ -117,8 +134,15 @@ api.interceptors.response.use(
         processQueue(refreshError, null);
         isRefreshing = false;
 
-        // Token'ları temizle
-        localStorage.removeItem("accessToken");
+        // Zustand store'u temizle
+        const store = getAuthStore();
+        if (store?.clearAuth) {
+          store.clearAuth();
+        } else {
+          // Fallback: localStorage'dan temizle
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("user");
+        }
 
         // Login sayfasına yönlendir (sadece bir kez)
         if (typeof window !== "undefined" && !window._redirectingToLogin) {

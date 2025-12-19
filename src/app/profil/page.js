@@ -1,59 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { useLogout } from "@/hooks/auth/useLogout";
+import { useAuthStore } from "@/stores/authStore";
 
 export default function ProfilePage() {
   const router = useRouter();
   const { mutate: logout, isPending: isLoggingOut } = useLogout();
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const user = useAuthStore((state) => state.user);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   useEffect(() => {
-    // Kullanıcı bilgilerini localStorage'dan al
-    const token = localStorage.getItem("accessToken");
-    const userData = localStorage.getItem("user");
-
-    console.log("Token:", token);
-    console.log("User data from localStorage:", userData);
-
-    if (!token) {
-      // Token yoksa login sayfasına yönlendir
+    // Token yoksa login sayfasına yönlendir
+    if (!isLoggedIn) {
       router.push("/hesap/giris");
-      return;
     }
-
-    if (userData) {
-      try {
-        const parsedUser = JSON.parse(userData);
-        console.log("Parsed user:", parsedUser);
-        setUser(parsedUser);
-      } catch (error) {
-        console.error("Error parsing user data:", error);
-      }
-    } else {
-      console.log("No user data in localStorage");
-    }
-
-    setIsLoading(false);
-  }, [router]);
+  }, [isLoggedIn, router]);
 
   const handleLogout = () => {
     logout();
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-900 rounded-full animate-spin" />
-      </div>
-    );
-  }
-
-  if (!user) {
+  if (!isLoggedIn || !user) {
     return (
       <div className="py-14">
         <div className="">

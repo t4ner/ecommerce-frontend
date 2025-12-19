@@ -1,6 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { register } from "@/services/authService";
+import { useAuthStore } from "@/stores/authStore";
 
 /**
  * Kullanıcı kaydı için mutation hook
@@ -8,32 +9,24 @@ import { register } from "@/services/authService";
  */
 export const useRegister = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const setAuth = useAuthStore((state) => state.setAuth);
 
   return useMutation({
     mutationFn: (userData) => register(userData),
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       // Response yapısı: response.data.data.data.accessToken ve response.data.data.data.user
       const responseData = response.data?.data?.data || response.data?.data;
-      
-      // Access token'ı localStorage'a kaydet
-      // Refresh token otomatik olarak cookie'ye kaydedilir (httpOnly)
+
+      // Zustand store'a kaydet
       if (responseData?.accessToken) {
-        localStorage.setItem("accessToken", responseData.accessToken);
-        
-        // Kullanıcı bilgilerini localStorage'a kaydet
-        if (responseData?.user) {
-          localStorage.setItem("user", JSON.stringify(responseData.user));
-          console.log("User data saved:", responseData.user);
-        } else {
-          console.log("No user data in response:", responseData);
-        }
-        
-        console.log(
-          "Access token saved to localStorage:",
-          responseData.accessToken
-        );
-        // Auth değişikliğini bildir
-        window.dispatchEvent(new Event("auth-change"));
+        setAuth(responseData.accessToken, responseData.user);
+        console.log("Access token and user saved successfully");
+
+        // Eski sepet cache'ini temizle ve yeni kullanıcının sepetini getir
+        queryClient.removeQueries({ queryKey: ["cart"] });
+        // Yeni kullanıcının sepetini hemen çek
+        await queryClient.refetchQueries({ queryKey: ["cart"] });
       } else {
         console.log("No accessToken in response", response.data);
       }

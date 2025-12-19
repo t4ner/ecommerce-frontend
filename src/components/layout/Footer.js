@@ -79,7 +79,7 @@ export default function Footer() {
 
         {/* Bottom Section - Logo, Attribution, Social */}
         <div className="pt-10">
-          <div className="flex items-center justify-between">
+          <div className="flex items-end justify-between pb-2">
             {/* Logo - Left */}
             <div>
               <Link href="/" className="cursor-pointer">

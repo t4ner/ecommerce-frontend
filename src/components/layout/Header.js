@@ -1,37 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/hooks/cart/useCart";
 import { useCartSidebarStore } from "@/stores/cartNotificationStore";
 import { useLogout } from "@/hooks/auth/useLogout";
+import { useAuthStore } from "@/stores/authStore";
 
 export default function Header() {
   const { data: cart } = useCart();
   const { openSidebar } = useCartSidebarStore();
   const { mutate: logout, isPending: isLoggingOut } = useLogout();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const cartItemCount = cart?.itemCount || cart?.cart?.items?.length || 0;
-
-  // Kullanıcı giriş durumunu kontrol et
-  useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem("accessToken");
-      setIsLoggedIn(!!token);
-    };
-
-    checkAuth();
-    // Storage event'lerini dinle (başka tab'lerde logout yapıldığında)
-    window.addEventListener("storage", checkAuth);
-    // Custom event dinle (aynı tab'de logout yapıldığında)
-    window.addEventListener("auth-change", checkAuth);
-
-    return () => {
-      window.removeEventListener("storage", checkAuth);
-      window.removeEventListener("auth-change", checkAuth);
-    };
-  }, []);
 
   const handleLogout = () => {
     logout();
