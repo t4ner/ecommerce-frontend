@@ -26,7 +26,7 @@ export default function Navbar() {
       ) : isError ? (
         <div className="text-sm text-red-500">Hata oluştu</div>
       ) : (
-        <ul className="flex items-center gap-20 text-[13px] font-[550] uppercase tracking-widest">
+        <ul className="flex items-center gap-20 text-[12px] font-[550] uppercase tracking-widest">
           {visibleCategories && visibleCategories.length > 0 ? (
             visibleCategories.map((category) => (
               <li
@@ -57,7 +57,7 @@ export default function Navbar() {
 
                 {hasChildren(category) && hoveredCategory === category._id && (
                   <div
-                    className="absolute left-8 top-full pt-10 bg-transparent z-50"
+                    className="absolute left-8 top-full pt-8 bg-transparent z-50"
                     onMouseEnter={() => setHoveredCategory(category._id)}
                     onMouseLeave={() => setHoveredCategory(null)}
                   >

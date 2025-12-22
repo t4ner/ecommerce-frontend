@@ -47,7 +47,7 @@ export default function Categories() {
     <section>
       {/* Header */}
       <div className="flex items-center gap-4 mb-10">
-        <h2 className="text-[15px] font-[550] uppercase tracking-widest">
+        <h2 className="text-[13px] font-[550] uppercase tracking-widest">
           Kategoriler
         </h2>
 
