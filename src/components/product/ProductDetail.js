@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useAddToCart } from "@/hooks/cart/useAddToCart";
 
@@ -8,6 +8,10 @@ export default function ProductDetail({ product }) {
   const [quantity, setQuantity] = useState(1);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const { mutate: addToCart, isPending: isAddingToCart } = useAddToCart();
+
+  // Her resim için zoom durumu
+  const [zoomStates, setZoomStates] = useState({});
+  const imageRefs = useRef({});
 
   // Her ürün için 1-15 arasında rastgele sayı
   const randomCount = useMemo(() => {
@@ -30,6 +34,35 @@ export default function ProductDetail({ product }) {
       product: product,
     });
   };
+
+  // Zoom fonksiyonları
+  const handleMouseEnter = (index) => {
+    setZoomStates((prev) => ({
+      ...prev,
+      [index]: { ...prev[index], isZoomed: true },
+    }));
+  };
+
+  const handleMouseLeave = (index) => {
+    setZoomStates((prev) => ({
+      ...prev,
+      [index]: { ...prev[index], isZoomed: false, x: 0, y: 0 },
+    }));
+  };
+
+  const handleMouseMove = (e, index) => {
+    const container = imageRefs.current[index];
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+    setZoomStates((prev) => ({
+      ...prev,
+      [index]: { ...prev[index], x, y },
+    }));
+  };
   return (
     <div className="py-14">
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-16">
@@ -37,21 +70,45 @@ export default function ProductDetail({ product }) {
         <div className="space-y-4 lg:col-span-4">
           {/* Ana Görseller - Normal akışta, sayfa scroll'u ile kayar */}
           {product.images?.length > 0 ? (
-            product.images.map((image, index) => (
-              <div
-                key={index}
-                className="relative border border-gray-100 shadow-md w-full aspect-square overflow-hidden rounded-lg group cursor-zoom-in"
-              >
-                <Image
-                  src={image}
-                  alt={`${product.name} - Görsel ${index + 1}`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover p-6 transition-transform duration-500 ease-in-out group-hover:scale-125"
-                  priority={index === 0}
-                />
-              </div>
-            ))
+            product.images.map((image, index) => {
+              const zoomState = zoomStates[index] || {
+                isZoomed: false,
+                x: 50,
+                y: 50,
+              };
+              const scale = zoomState.isZoomed ? 1.6 : 1;
+              const transformOrigin = `${zoomState.x}% ${zoomState.y}%`;
+
+              return (
+                <div
+                  key={index}
+                  ref={(el) => (imageRefs.current[index] = el)}
+                  className="relative border border-gray-100 shadow-md w-full aspect-square overflow-hidden rounded-lg cursor-zoom-in bg-white"
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={() => handleMouseLeave(index)}
+                  onMouseMove={(e) => handleMouseMove(e, index)}
+                >
+                  <div
+                    className="absolute inset-0 p-8"
+                    style={{
+                      transform: `scale(${scale})`,
+                      transformOrigin: transformOrigin,
+                      transition: zoomState.isZoomed
+                        ? "none"
+                        : "transform 0.3s ease-out",
+                    }}
+                  >
+                    <Image
+                      src={image}
+                      alt={`${product.name} - Görsel ${index + 1}`}
+                      fill
+                     className="object-contain p-10"
+                      priority={index === 0}
+                    />
+                  </div>
+                </div>
+              );
+            })
           ) : (
             <div className="relative border border-gray-100 shadow-md w-full aspect-square overflow-hidden rounded-lg">
               <div className="absolute inset-0 flex items-center justify-center text-sm text-gray-400">
@@ -266,7 +323,6 @@ export default function ProductDetail({ product }) {
                     className={`w-4 h-4 mr-5 text-black transition-transform duration-500 ${
                       isDescriptionOpen ? "rotate-180" : ""
                     }`}
-                   
                   />
                 </button>
                 <div

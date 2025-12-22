@@ -59,7 +59,9 @@ export default function Banner() {
                     alt={banner.title || "Banner"}
                     width={1550}
                     height={700}
-                   
+                    className="w-full h-full object-cover"
+                    loading={isFirstBanner ? "eager" : "lazy"}
+                    priority={isFirstBanner}
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
                 </Link>
