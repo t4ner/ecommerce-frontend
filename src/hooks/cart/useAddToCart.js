@@ -12,12 +12,9 @@ export const useAddToCart = () => {
 
   return useMutation({
     mutationFn: ({ productData, product }) => {
-      console.log("Sepete ekleme isteği:", productData);
       return addToCart(productData);
     },
     onSuccess: async (response, variables) => {
-      console.log("Sepete ekleme başarılı:", response);
-
       // Sepet listesini yenile ve güncel veriyi al
       await queryClient.invalidateQueries({ queryKey: ["cart"] });
 
@@ -25,7 +22,7 @@ export const useAddToCart = () => {
       openSidebar();
     },
     onError: (error) => {
-      console.error("Sepete ekleme hatası:", error);
+      // Hata yönetimi component seviyesinde yapılabilir
     },
   });
 };

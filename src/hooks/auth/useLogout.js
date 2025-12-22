@@ -26,12 +26,10 @@ export const useLogout = () => {
       // Sepet query'sini null olarak set et
       queryClient.setQueryData(["cart"], null);
       // Refresh token cookie'de, backend logout endpoint'i temizler
-      console.log("Logout successful, frontend cart reset");
       // Login sayfasına yönlendir
       router.push("/hesap/giris");
     },
     onError: (error) => {
-      console.error("Logout error:", error);
       // Hata olsa bile store'u temizle, sepet cache'ini temizle ve yönlendir
       clearAuth();
       closeSidebar();

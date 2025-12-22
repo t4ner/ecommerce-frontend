@@ -21,21 +21,17 @@ export const useRegister = () => {
       // Zustand store'a kaydet
       if (responseData?.accessToken) {
         setAuth(responseData.accessToken, responseData.user);
-        console.log("Access token and user saved successfully");
 
         // Eski sepet cache'ini temizle ve yeni kullanıcının sepetini getir
         queryClient.removeQueries({ queryKey: ["cart"] });
         // Yeni kullanıcının sepetini hemen çek
         await queryClient.refetchQueries({ queryKey: ["cart"] });
-      } else {
-        console.log("No accessToken in response", response.data);
       }
       // Başarılı kayıt sonrası ana sayfaya yönlendir
       router.push("/");
     },
     onError: (error) => {
-      // Hata yönetimi mutation içinde yapılabilir veya component'te
-      console.error("Register error:", error);
+      // Hata yönetimi component seviyesinde yapılabilir
     },
   });
 };

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { useNewProducts } from "@/hooks/products/useNewProducts";
@@ -12,14 +12,16 @@ export default function NewProducts() {
   const [sliderRef, sliderInstanceRef] = useKeenSlider({
     mode: "free-snap",
     slides: {
-      perView: 3.7,
+      perView: 3.5,
     },
     rubberband: true,
   });
 
+  const productsList = useMemo(() => products || [], [products]);
+
   useEffect(() => {
     sliderInstanceRef.current?.update();
-  }, [products, sliderInstanceRef]);
+  }, [productsList, sliderInstanceRef]);
 
   if (isLoading) {
     return (
@@ -40,17 +42,47 @@ export default function NewProducts() {
   return (
     <section>
       {/* Header */}
-      <div className="flex items-center justify-between mb-10">
+      <div className="flex items-center gap-4 mb-10">
         <h2 className="text-[15px] font-[550] uppercase tracking-widest text-black">
           Yeni Ürünler
         </h2>
+
+        {/* Navigation Arrows */}
+        {productsList?.length > 0 && (
+          <div className="flex items-center space-x-3  gap-2 pl-5">
+            <button
+              onClick={() => sliderInstanceRef.current?.prev()}
+              className="cursor-pointer p-2 rounded  transition-all hover:scale-110"
+              aria-label="Önceki ürünler"
+            >
+              <Image
+                src="/images/icons/arrow-left.svg"
+                alt="Önceki"
+                width={24}
+                height={24}
+              />
+            </button>
+            <button
+              onClick={() => sliderInstanceRef.current?.next()}
+              className=" cursor-pointer p-2 rounded transition-all hover:scale-110"
+              aria-label="Sonraki ürünler"
+            >
+              <Image
+                src="/images/icons/arrow-right.svg"
+                alt="Sonraki"
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Products */}
       <div className="relative">
         <div ref={sliderRef} className="keen-slider pb-4">
-          {products?.length ? (
-            products.map((product, index) => (
+          {productsList?.length ? (
+            productsList.map((product, index) => (
               <Link
                 key={product._id}
                 href={`/urun/${product.slug}`}
@@ -65,7 +97,7 @@ export default function NewProducts() {
                         alt={product.name}
                         fill
                         sizes="350px"
-                        className={`object-contain p-10 ${
+                        className={`object-contain p-12 ${
                           product.images?.[1] ? "group-hover:opacity-0" : ""
                         }`}
                         loading="lazy"
@@ -76,7 +108,7 @@ export default function NewProducts() {
                           alt={product.name}
                           fill
                           sizes="350px"
-                          className="object-contain p-10 opacity-0 group-hover:opacity-100"
+                          className="object-contain p-12 opacity-0 group-hover:opacity-100"
                         />
                       )}
                     </>
@@ -112,36 +144,6 @@ export default function NewProducts() {
             </div>
           )}
         </div>
-
-        {/* Navigation Arrows */}
-        {products?.length > 0 && (
-          <>
-            <button
-              onClick={() => sliderInstanceRef.current?.prev()}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-15 z-10 bg-white/20 backdrop-blur-md cursor-pointer p-2 rounded shadow-lg transition-all hover:scale-110"
-              aria-label="Önceki ürünler"
-            >
-              <Image
-                src="/images/icons/arrow-left.svg"
-                alt="Önceki"
-                width={24}
-                height={24}
-              />
-            </button>
-            <button
-              onClick={() => sliderInstanceRef.current?.next()}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-15 z-10 bg-white/20 backdrop-blur-md cursor-pointer p-2 rounded shadow-lg transition-all hover:scale-110"
-              aria-label="Sonraki ürünler"
-            >
-              <Image
-                src="/images/icons/arrow-right.svg"
-                alt="Sonraki"
-                width={24}
-                height={24}
-              />
-            </button>
-          </>
-        )}
       </div>
     </section>
   );

@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   reactCompiler: true,
   images: {
     remotePatterns: [
@@ -13,6 +12,16 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
       },
     ],
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60,
+  },
+  // Production optimizasyonları
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
+  // Build optimizasyonları
+  experimental: {
+    optimizePackageImports: ["@tanstack/react-query", "keen-slider"],
   },
 };
 

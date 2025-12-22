@@ -45,10 +45,42 @@ export default function Categories() {
 
   return (
     <section>
-      {/* Title */}
-      <h2 className="text-[15px] font-[550] uppercase tracking-widest mb-10">
-        Kategoriler
-      </h2>
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-10">
+        <h2 className="text-[15px] font-[550] uppercase tracking-widest">
+          Kategoriler
+        </h2>
+
+        {/* Navigation Arrows */}
+        {visibleCategories?.length > 0 && (
+          <div className="flex items-center space-x-3  gap-2 pl-5">
+            <button
+              onClick={() => sliderInstanceRef.current?.prev()}
+              className="cursor-pointer p-2 rounded  transition-all hover:scale-110"
+              aria-label="Önceki kategoriler"
+            >
+              <Image
+                src="/images/icons/arrow-left.svg"
+                alt="Önceki"
+                width={24}
+                height={24}
+              />
+            </button>
+            <button
+              onClick={() => sliderInstanceRef.current?.next()}
+              className=" cursor-pointer p-2 rounded transition-all hover:scale-110"
+              aria-label="Sonraki kategoriler"
+            >
+              <Image
+                src="/images/icons/arrow-right.svg"
+                alt="Sonraki"
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* Categories */}
       <div className="relative">
@@ -68,7 +100,6 @@ export default function Categories() {
                   width={200}
                   height={200}
                   className="absolute inset-0 object-cover opacity-100"
-                  
                 />
 
                 {/* Category Image - Üstteki görsel */}
@@ -79,7 +110,6 @@ export default function Categories() {
                     width={400}
                     height={400}
                     className="relative z-10 object-contain transition-transform duration-300 group-hover:scale-110"
-
                   />
                 ) : null}
               </div>
@@ -91,36 +121,6 @@ export default function Categories() {
             </Link>
           ))}
         </div>
-
-        {/* Navigation Arrows */}
-        {visibleCategories?.length > 0 && (
-          <>
-            <button
-              onClick={() => sliderInstanceRef.current?.prev()}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-15 z-10 bg-white/20 backdrop-blur-md cursor-pointer p-2 rounded shadow-lg transition-all hover:scale-110"
-              aria-label="Önceki kategoriler"
-            >
-              <Image
-                src="/images/icons/arrow-left.svg"
-                alt="Önceki"
-                width={24}
-                height={24}
-              />
-            </button>
-            <button
-              onClick={() => sliderInstanceRef.current?.next()}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-15 z-10 bg-white/20 backdrop-blur-md cursor-pointer p-2 rounded shadow-lg transition-all hover:scale-110"
-              aria-label="Sonraki kategoriler"
-            >
-              <Image
-                src="/images/icons/arrow-right.svg"
-                alt="Sonraki"
-                width={24}
-                height={24}
-              />
-            </button>
-          </>
-        )}
       </div>
     </section>
   );

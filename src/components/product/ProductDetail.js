@@ -20,17 +20,13 @@ export default function ProductDetail({ product }) {
 
   const handleAddToCart = () => {
     const productId = product._id || product.id;
-    if (!productId) {
-      console.error("Product ID bulunamadı:", product);
-      return;
-    }
-    const requestData = {
-      productId: productId,
-      quantity: Number(quantity),
-    };
-    console.log("Sepete ekleniyor:", requestData);
+    if (!productId) return;
+
     addToCart({
-      productData: requestData,
+      productData: {
+        productId: productId,
+        quantity: Number(quantity),
+      },
       product: product,
     });
   };
@@ -67,7 +63,7 @@ export default function ProductDetail({ product }) {
     <div className="py-14">
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-16">
         {/* Sol Taraf - Görseller (Sayfa scroll'u ile kayar) */}
-        <div className="space-y-4 lg:col-span-4">
+        <div className="space-y-20 lg:col-span-4">
           {/* Ana Görseller - Normal akışta, sayfa scroll'u ile kayar */}
           {product.images?.length > 0 ? (
             product.images.map((image, index) => {
@@ -102,7 +98,7 @@ export default function ProductDetail({ product }) {
                       src={image}
                       alt={`${product.name} - Görsel ${index + 1}`}
                       fill
-                     className="object-contain p-20"
+                      className="object-contain p-28"
                       priority={index === 0}
                     />
                   </div>

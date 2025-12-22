@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 import { useProductsByCategorySlug } from "@/hooks/products/useProductsByCategorySlug";
 
 export default function CategoryProducts({ categorySlug }) {
@@ -10,6 +11,12 @@ export default function CategoryProducts({ categorySlug }) {
     isLoading,
     isError,
   } = useProductsByCategorySlug(categorySlug);
+
+  const productsList = useMemo(() => products || [], [products]);
+  const categoryName = useMemo(
+    () => productsList[0]?.category?.name || "Kategori",
+    [productsList]
+  );
 
   if (isLoading) {
     return (
@@ -32,7 +39,7 @@ export default function CategoryProducts({ categorySlug }) {
     );
   }
 
-  if (!products || products.length === 0) {
+  if (!productsList || productsList.length === 0) {
     return (
       <div className="py-24 text-center min-h-[60vh]">
         <h2 className="text-[14px] font-[550] uppercase tracking-widest text-black mb-4">
@@ -41,8 +48,6 @@ export default function CategoryProducts({ categorySlug }) {
       </div>
     );
   }
-
-  const categoryName = products[0]?.category?.name || "Kategori";
 
   return (
     <div className="py-14">
@@ -55,14 +60,14 @@ export default function CategoryProducts({ categorySlug }) {
 
       {/* Ürün Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
-        {products.map((product) => (
+        {productsList.map((product) => (
           <Link
             key={product._id}
             href={`/urun/${product.slug}`}
             className="group flex flex-col"
           >
             {/* Image */}
-            <div className="relative border border-gray-100 shadow-md w-[350px] h-[300px] overflow-hidden rounded-lg mb-5 bg-white">
+            <div className="relative border border-gray-100 shadow-md w-full aspect-7/6 overflow-hidden rounded-lg mb-5 bg-white">
               {product.images?.[0] ? (
                 <>
                   <Image
@@ -70,7 +75,7 @@ export default function CategoryProducts({ categorySlug }) {
                     alt={product.name}
                     fill
                     sizes="350px"
-                    className={`object-contain p-10 ${
+                    className={`object-contain p-12 ${
                       product.images?.[1] ? "group-hover:opacity-0" : ""
                     }`}
                     loading="lazy"
@@ -81,7 +86,7 @@ export default function CategoryProducts({ categorySlug }) {
                       alt={product.name}
                       fill
                       sizes="350px"
-                      className="object-contain p-10 opacity-0 group-hover:opacity-100"
+                      className="object-contain p-12 opacity-0 group-hover:opacity-100"
                     />
                   )}
                 </>
