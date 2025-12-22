@@ -65,7 +65,7 @@ export default function NewProducts() {
                         alt={product.name}
                         fill
                         sizes="350px"
-                        className={`object-contain p-3 ${
+                        className={`object-contain p-10 ${
                           product.images?.[1] ? "group-hover:opacity-0" : ""
                         }`}
                         loading="lazy"
@@ -76,7 +76,7 @@ export default function NewProducts() {
                           alt={product.name}
                           fill
                           sizes="350px"
-                          className="object-contain p-3 opacity-0 group-hover:opacity-100"
+                          className="object-contain p-10 opacity-0 group-hover:opacity-100"
                         />
                       )}
                     </>
@@ -88,8 +88,8 @@ export default function NewProducts() {
                 </div>
 
                 {/* Info */}
-                <div className="flex flex-col gap-2 px-1">
-                  <h3 className="uppercase text-[13px] font-[550] tracking-widest text-black">
+                <div className="flex flex-col gap-2 w-[350px]">
+                  <h3 className="uppercase text-[13px] font-[550] tracking-widest text-black line-clamp-1">
                     {product.name}
                   </h3>
                   {/* Fiyat */}

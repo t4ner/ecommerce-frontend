@@ -54,7 +54,7 @@ export default function CategoryProducts({ categorySlug }) {
       </div>
 
       {/* Ürün Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
         {products.map((product) => (
           <Link
             key={product._id}
@@ -62,25 +62,26 @@ export default function CategoryProducts({ categorySlug }) {
             className="group flex flex-col"
           >
             {/* Image */}
-            <div className="relative border border-gray-100 shadow-md w-full aspect-square overflow-hidden rounded-lg mb-5">
+            <div className="relative border border-gray-100 shadow-md w-[350px] h-[300px] overflow-hidden rounded-lg mb-5 bg-white">
               {product.images?.[0] ? (
                 <>
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className={`object-cover p-3 transition-opacity duration-500 ${
+                    sizes="350px"
+                    className={`object-contain p-10 ${
                       product.images?.[1] ? "group-hover:opacity-0" : ""
                     }`}
+                    loading="lazy"
                   />
                   {product.images?.[1] && (
                     <Image
                       src={product.images[1]}
                       alt={product.name}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      sizes="350px"
+                      className="object-contain p-10 opacity-0 group-hover:opacity-100"
                     />
                   )}
                 </>
@@ -93,7 +94,7 @@ export default function CategoryProducts({ categorySlug }) {
 
             {/* Info */}
             <div className="flex flex-col gap-2 px-1">
-              <h3 className="uppercase text-[13px] font-[550] tracking-widest text-black line-clamp-2">
+              <h3 className="uppercase text-[13px] font-[550] tracking-widest text-black line-clamp-1">
                 {product.name}
               </h3>
               {/* Fiyat */}

@@ -102,7 +102,7 @@ export default function ProductDetail({ product }) {
                       src={image}
                       alt={`${product.name} - Görsel ${index + 1}`}
                       fill
-                     className="object-contain p-10"
+                     className="object-contain p-20"
                       priority={index === 0}
                     />
                   </div>
@@ -141,7 +141,7 @@ export default function ProductDetail({ product }) {
             </div>
 
             {/* Ürün Adı */}
-            <h1 className="text-[20px]  font-[550] text-black uppercase tracking-widest">
+            <h1 className="text-[20px]  font-[550] text-black uppercase leading-10 tracking-widest">
               {product.name}
             </h1>
 
