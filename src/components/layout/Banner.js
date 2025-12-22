@@ -38,7 +38,7 @@ export default function Banner() {
   const goToNext = () => setCurrentIndex((prev) => (prev + 1) % banners.length);
 
   return (
-    <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px] rounded-lg mt-5 overflow-hidden group">
+    <div className="relative w-full h-[500px] md:h-[700px] rounded-lg mt-5 overflow-hidden group">
       {/* Banner Container - Slide Geçişi */}
       <div
         className="flex transition-transform duration-700 ease-in-out h-full"
@@ -57,11 +57,9 @@ export default function Banner() {
                   <Image
                     src={banner.imageUrl}
                     alt={banner.title || "Banner"}
-                    width={1000}
-                    height={1000}
-                    className="w-full h-full object-cover"
-                    loading={isFirstBanner ? "eager" : "lazy"}
-                    priority={isFirstBanner}
+                    width={1550}
+                    height={700}
+                   
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
                 </Link>
@@ -70,8 +68,8 @@ export default function Banner() {
                   <Image
                     src={banner.imageUrl}
                     alt={banner.title || "Banner"}
-                    width={1000}
-                    height={1000}
+                    width={1550}
+                    height={700}
                     className="w-full h-full object-cover"
                     loading={isFirstBanner ? "eager" : "lazy"}
                     priority={isFirstBanner}
