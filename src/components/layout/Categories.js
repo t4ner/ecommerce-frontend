@@ -60,14 +60,14 @@ export default function Categories() {
               className="keen-slider__slide group flex flex-col items-center"
             >
               {/* Category Container */}
-              <div className="relative w-64 h-56 flex items-center justify-center">
+              <div className="relative w-56 h-60 flex items-center justify-center">
                 {/* Background Icon - Arka plan */}
                 <Image
                   src="/images/icons/icon.svg"
                   alt="category background"
-                  width={224}
-                  height={224}
-                  className="absolute inset-0 w-full h-full object-contain opacity-100"
+                  width={200}
+                  height={200}
+                  className="absolute inset-0 object-cover opacity-100"
                   
                 />
 
@@ -76,8 +76,8 @@ export default function Categories() {
                   <Image
                     src={category.imageUrl}
                     alt={category.name}
-                    width={180}
-                    height={180}
+                    width={400}
+                    height={400}
                     className="relative z-10 object-contain transition-transform duration-300 group-hover:scale-110"
 
                   />
@@ -85,7 +85,7 @@ export default function Categories() {
               </div>
 
               {/* Category Name */}
-              <span className="mt-5 border border-gray-200 py-2 px-5 rounded-lg text-center text-[12px] font-[550] uppercase tracking-widest text-black">
+              <span className="border border-gray-400 py-2 px-5 rounded-lg text-center text-[12px] font-[550] uppercase tracking-widest text-black">
                 {category.name}
               </span>
             </Link>

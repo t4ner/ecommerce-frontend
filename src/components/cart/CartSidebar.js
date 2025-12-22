@@ -27,7 +27,7 @@ export default function CartSidebar() {
     return null;
   }
 
-  const cartItems = cart?.cart?.items || [];
+  const cartItems = Array.isArray(cart?.cart?.items) ? cart.cart.items : [];
   const totalPrice = parseFloat(cart?.total || 0);
   const itemCount = cart?.itemCount || 0;
 
@@ -111,7 +111,12 @@ export default function CartSidebar() {
             <div className="text-center py-24">
               <div className="mb-8 flex justify-center">
                 <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center">
-                <Image src="/images/icons/basket.svg" alt="Sepet Boş" width={40} height={40} />
+                  <Image
+                    src="/images/icons/basket.svg"
+                    alt="Sepet Boş"
+                    width={40}
+                    height={40}
+                  />
                 </div>
               </div>
               <p className="text-[13px] font-[550] uppercase tracking-widest text-black mb-7">
@@ -140,152 +145,157 @@ export default function CartSidebar() {
             </div>
           ) : (
             <div className="space-y-3">
-              {cartItems.map((item) => {
-                const itemTotal = item.product.price * item.quantity;
-                return (
-                  <div
-                    key={item.product._id}
-                    className="group bg-white rounded-xl border border-gray-200/80 p-5 hover:shadow-sm hover:border-gray-300 transition-all duration-300"
-                  >
-                    <div className="flex gap-4">
-                      {/* Ürün Görseli */}
-                      <Link
-                        href={`/urun/${item.product.slug}`}
-                        onClick={closeSidebar}
-                        className="relative w-20 h-20 shrink-0 bg-gray-100 rounded-lg overflow-hidden group-hover:shadow-md transition-all duration-300"
-                      >
-                        <Image
-                          src={
-                            item.product.images?.[0] ||
-                            "/images/placeholder-product.png"
-                          }
-                          alt={item.product.name}
-                          fill
-                          sizes="80px"
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </Link>
+              {cartItems &&
+                cartItems.length > 0 &&
+                cartItems.map((item) => {
+                  if (!item || !item.product) return null;
+                  const itemTotal = item.product.price * item.quantity;
+                  return (
+                    <div
+                      key={item.product._id}
+                      className="group bg-white rounded-xl border border-gray-200/80 p-5 hover:shadow-sm hover:border-gray-300 transition-all duration-300"
+                    >
+                      <div className="flex gap-4">
+                        {/* Ürün Görseli */}
+                        <Link
+                          href={`/urun/${item.product.slug}`}
+                          onClick={closeSidebar}
+                          className="relative w-20 h-20 shrink-0 bg-gray-100 rounded-lg overflow-hidden group-hover:shadow-md transition-all duration-300"
+                        >
+                          <Image
+                            src={
+                              item.product.images?.[0] ||
+                              "/images/placeholder-product.png"
+                            }
+                            alt={item.product.name}
+                            fill
+                            sizes="80px"
+                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                        </Link>
 
-                      {/* Ürün Bilgileri */}
-                      <div className="flex-1 flex flex-col justify-between min-w-0">
-                        <div>
-                          {/* Ürün Adı ve Sil Butonu */}
-                          <div className="flex items-start justify-between mb-2 gap-2">
-                            <Link
-                              href={`/urun/${item.product.slug}`}
-                              onClick={closeSidebar}
-                              className="text-[12px] font-[550] uppercase tracking-widest hover:text-gray-600 flex-1 pr-2 line-clamp-2 transition-colors"
-                            >
-                              {item.product.name}
-                            </Link>
-                            <button
-                              onClick={() => handleRemove(item.product._id)}
-                              disabled={isRemoving}
-                              className="w-8 h-8 rounded-sm bg-red-50 text-red-500 disabled:opacity-50 transition-all duration-200 flex items-center justify-center shrink-0 group/remove"
-                              aria-label="Ürünü sil"
-                            >
-                              <svg
-                                className="w-4 h-4 group-hover/remove:rotate-90 transition-transform duration-200"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                        {/* Ürün Bilgileri */}
+                        <div className="flex-1 flex flex-col justify-between min-w-0">
+                          <div>
+                            {/* Ürün Adı ve Sil Butonu */}
+                            <div className="flex items-start justify-between mb-2 gap-2">
+                              <Link
+                                href={`/urun/${item.product.slug}`}
+                                onClick={closeSidebar}
+                                className="text-[12px] font-[550] uppercase tracking-widest hover:text-gray-600 flex-1 pr-2 line-clamp-2 transition-colors"
                               >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2.5}
-                                  d="M6 18L18 6M6 6l12 12"
-                                />
-                              </svg>
-                            </button>
-                          </div>
-
-                          {/* Birim Fiyat, Adet ve Toplam Fiyat - Yan Yana */}
-                          <div className="flex items-center justify-between mt-6 w-full">
-                            {/* Birim Fiyat */}
-                            <div className="text-[15px] font-medium tracking-wider text-black font-[Rubik] whitespace-nowrap shrink-0">
-                              ₺{" "}
-                              {item.product.price.toFixed(2).replace(".", ",")}
+                                {item.product.name}
+                              </Link>
+                              <button
+                                onClick={() => handleRemove(item.product._id)}
+                                disabled={isRemoving}
+                                className="w-8 h-8 rounded-sm bg-red-50 text-red-500 disabled:opacity-50 transition-all duration-200 flex items-center justify-center shrink-0 group/remove"
+                                aria-label="Ürünü sil"
+                              >
+                                <svg
+                                  className="w-4 h-4 group-hover/remove:rotate-90 transition-transform duration-200"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2.5}
+                                    d="M6 18L18 6M6 6l12 12"
+                                  />
+                                </svg>
+                              </button>
                             </div>
 
-                            {/* Adet Seçici - Ortada */}
-                            <div className="flex items-center justify-center flex-1 mx-4">
-                              <div className="flex items-center gap-3">
-                                <button
-                                  onClick={() =>
-                                    handleQuantityChange(
-                                      item.product._id,
-                                      item.quantity - 1
-                                    )
-                                  }
-                                  disabled={isUpdating || item.quantity <= 1}
-                                  className="w-6 h-6  rounded-full bg-white border border-gray-400 flex items-center justify-center text-gray-600 hover:border-gray-400 hover:text-gray-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
-                                  aria-label="Azalt"
-                                >
-                                  <svg
-                                    className="w-2.5 h-2.5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={3}
-                                      d="M20 12H4"
-                                    />
-                                  </svg>
-                                </button>
-                                <div className="min-w-[20px] text-center">
-                                  <span className="text-[14px] font-[550] tracking-wider font-[Rubik] text-black">
-                                    {item.quantity}
-                                  </span>
-                                </div>
-                                <button
-                                  onClick={() =>
-                                    handleQuantityChange(
-                                      item.product._id,
-                                      item.quantity + 1
-                                    )
-                                  }
-                                  disabled={isUpdating}
-                                  className="w-6 h-6 rounded-full bg-white border border-gray-400 flex items-center justify-center text-gray-600 hover:border-gray-400 hover:text-gray-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
-                                  aria-label="Artır"
-                                >
-                                  <svg
-                                    className="w-2.5 h-2.5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2.5}
-                                      d="M12 4v16m8-8H4"
-                                    />
-                                  </svg>
-                                </button>
+                            {/* Birim Fiyat, Adet ve Toplam Fiyat - Yan Yana */}
+                            <div className="flex items-center justify-between mt-6 w-full">
+                              {/* Birim Fiyat */}
+                              <div className="text-[15px] font-medium tracking-wider text-black font-[Rubik] whitespace-nowrap shrink-0">
+                                ₺{" "}
+                                {item.product.price
+                                  .toFixed(2)
+                                  .replace(".", ",")}
                               </div>
-                            </div>
 
-                            {/* Toplam Fiyat */}
-                            <div className="text-[15px] font-medium tracking-wide font-[Rubik] text-black whitespace-nowrap shrink-0">
-                              ₺ {itemTotal.toFixed(2).replace(".", ",")}
+                              {/* Adet Seçici - Ortada */}
+                              <div className="flex items-center justify-center flex-1 mx-4">
+                                <div className="flex items-center gap-3">
+                                  <button
+                                    onClick={() =>
+                                      handleQuantityChange(
+                                        item.product._id,
+                                        item.quantity - 1
+                                      )
+                                    }
+                                    disabled={isUpdating || item.quantity <= 1}
+                                    className="w-6 h-6  rounded-full bg-white border border-gray-400 flex items-center justify-center text-gray-600 hover:border-gray-400 hover:text-gray-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+                                    aria-label="Azalt"
+                                  >
+                                    <svg
+                                      className="w-2.5 h-2.5"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={3}
+                                        d="M20 12H4"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <div className="min-w-[20px] text-center">
+                                    <span className="text-[14px] font-[550] tracking-wider font-[Rubik] text-black">
+                                      {item.quantity}
+                                    </span>
+                                  </div>
+                                  <button
+                                    onClick={() =>
+                                      handleQuantityChange(
+                                        item.product._id,
+                                        item.quantity + 1
+                                      )
+                                    }
+                                    disabled={isUpdating}
+                                    className="w-6 h-6 rounded-full bg-white border border-gray-400 flex items-center justify-center text-gray-600 hover:border-gray-400 hover:text-gray-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+                                    aria-label="Artır"
+                                  >
+                                    <svg
+                                      className="w-2.5 h-2.5"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2.5}
+                                        d="M12 4v16m8-8H4"
+                                      />
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Toplam Fiyat */}
+                              <div className="text-[15px] font-medium tracking-wide font-[Rubik] text-black whitespace-nowrap shrink-0">
+                                ₺ {itemTotal.toFixed(2).replace(".", ",")}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           )}
         </div>
 
         {/* Footer - Total and Buttons */}
-        {cartItems.length > 0 && (
+        {cartItems && Array.isArray(cartItems) && cartItems.length > 0 && (
           <div className="border-t border-gray-200/60 bg-white/95 backdrop-blur-sm px-6 py-5 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
             {/* Total */}
             <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-200/60">
