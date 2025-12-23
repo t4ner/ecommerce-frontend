@@ -67,7 +67,7 @@ export default function CategoryProducts({ categorySlug }) {
             className="group flex flex-col"
           >
             {/* Image */}
-            <div className="relative border border-gray-100 shadow-md w-full aspect-7/6 overflow-hidden rounded-lg mb-5 bg-white">
+            <div className="relative border border-gray-100 shadow-md w-full aspect-squaren overflow-hidden rounded-lg mb-5 bg-white">
               {product.images?.[0] ? (
                 <>
                   <Image
@@ -75,7 +75,7 @@ export default function CategoryProducts({ categorySlug }) {
                     alt={product.name}
                     fill
                     sizes="350px"
-                    className={`object-contain p-12 ${
+                    className={`object-contain  ${
                       product.images?.[1] ? "group-hover:opacity-0" : ""
                     }`}
                     loading="lazy"
@@ -86,7 +86,7 @@ export default function CategoryProducts({ categorySlug }) {
                       alt={product.name}
                       fill
                       sizes="350px"
-                      className="object-contain p-12 opacity-0 group-hover:opacity-100"
+                      className="object-contain opacity-0 group-hover:opacity-100"
                     />
                   )}
                 </>

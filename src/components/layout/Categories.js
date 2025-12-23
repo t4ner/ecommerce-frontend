@@ -17,7 +17,7 @@ export default function Categories() {
   const [sliderRef, sliderInstanceRef] = useKeenSlider({
     mode: "free-snap",
     slides: {
-      perView: "auto",
+      perView: 5.6,
       spacing: 70,
     },
     rubberband: true,
@@ -53,7 +53,7 @@ export default function Categories() {
 
         {/* Navigation Arrows */}
         {visibleCategories?.length > 0 && (
-          <div className="flex items-center space-x-3  gap-2 pl-5">
+          <div className="flex items-center space-x-3 gap-2 pl-5">
             <button
               onClick={() => sliderInstanceRef.current?.prev()}
               className="cursor-pointer p-2 rounded  transition-all hover:scale-110"
@@ -92,7 +92,7 @@ export default function Categories() {
               className="keen-slider__slide group flex flex-col items-center"
             >
               {/* Category Container */}
-              <div className="relative w-56 h-60 flex items-center justify-center">
+              <div className="relative w-50 h-50 flex items-center justify-center">
                 {/* Background Icon - Arka plan */}
                 <Image
                   src="/images/icons/icon.svg"
@@ -107,15 +107,15 @@ export default function Categories() {
                   <Image
                     src={category.imageUrl}
                     alt={category.name}
-                    width={400}
-                    height={400}
-                    className="relative z-10 object-contain transition-transform duration-300 group-hover:scale-110"
+                    width={200}
+                    height={200}
+                    className="relative z-10 object-contain transition-transform duration-500 group-hover:scale-120"
                   />
                 ) : null}
               </div>
 
               {/* Category Name */}
-              <span className="border border-gray-400 py-2 px-5 rounded-lg text-center text-[12px] font-[550] uppercase tracking-widest text-black">
+              <span className="mt-5 border border-gray-400 py-2 px-5 rounded-lg text-center text-[12px] font-[550] uppercase tracking-widest text-black">
                 {category.name}
               </span>
             </Link>

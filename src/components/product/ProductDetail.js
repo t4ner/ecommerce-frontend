@@ -98,7 +98,7 @@ export default function ProductDetail({ product }) {
                       src={image}
                       alt={`${product.name} - Görsel ${index + 1}`}
                       fill
-                      className="object-contain p-28"
+                      className="object-contain "
                       priority={index === 0}
                     />
                   </div>

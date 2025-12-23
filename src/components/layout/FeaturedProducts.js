@@ -135,7 +135,7 @@ export default function FeaturedProducts() {
                 className="keen-slider__slide group flex flex-col"
               >
                 {/* Image */}
-                <div className="relative border border-gray-100 shadow-md w-[350px] h-[300px] overflow-hidden rounded-lg mb-5 bg-white">
+                <div className="relative border border-gray-100 shadow-md w-[350px] h-[350px] overflow-hidden rounded-lg mb-5 bg-white">
                   {product.images?.[0] ? (
                     <>
                       <Image
@@ -143,7 +143,7 @@ export default function FeaturedProducts() {
                         alt={product.name}
                         fill
                         sizes="350px"
-                        className={`object-contain p-12 ${
+                        className={`object-contain ${
                           product.images?.[1] ? "group-hover:opacity-0" : ""
                         }`}
                         loading="lazy"
@@ -154,7 +154,7 @@ export default function FeaturedProducts() {
                           alt={product.name}
                           fill
                           sizes="350px"
-                          className="object-contain p-12 opacity-0 group-hover:opacity-100"
+                          className="object-contain opacity-0 group-hover:opacity-100"
                         />
                       )}
                     </>
