@@ -43,7 +43,7 @@ export default function NewProducts() {
     <section>
       {/* Header */}
       <div className="flex items-center gap-4 mb-10">
-        <h2 className="text-[13px] font-[550] uppercase tracking-widest text-black">
+        <h2 className="text-[14px] font-[550] uppercase tracking-widest text-black">
           Yeni Ürünler
         </h2>
 

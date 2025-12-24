@@ -67,7 +67,7 @@ export default function CategoryProducts({ categorySlug }) {
             className="group flex flex-col"
           >
             {/* Image */}
-            <div className="relative border border-gray-100 shadow-md w-full aspect-squaren overflow-hidden rounded-lg mb-5 bg-white">
+            <div className="relative aspect-square border border-gray-100 shadow-md w-full overflow-hidden rounded-lg mb-5 bg-white">
               {product.images?.[0] ? (
                 <>
                   <Image

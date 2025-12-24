@@ -70,7 +70,7 @@ export default function FeaturedProducts() {
       {/* Header */}
       <div className="flex items-center justify-between mb-10">
         <div className="flex items-center gap-4">
-          <h2 className="text-[13px] font-[550] uppercase tracking-widest">
+          <h2 className="text-[14px] font-[550] uppercase tracking-widest">
             Öne Çıkan Ürünler
           </h2>
 

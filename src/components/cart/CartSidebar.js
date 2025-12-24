@@ -65,20 +65,15 @@ export default function CartSidebar() {
 
       {/* Sidebar - Sağdan açılan */}
       <div
-        className={`absolute right-0 top-0 h-full w-full max-w-xl  bg-gray-50 shadow-2xl flex flex-col transition-transform duration-300 ease-out ${
+        className={`absolute right-0 top-0 h-full w-full max-w-[610px]  bg-gray-50 shadow-2xl flex flex-col transition-transform duration-300 ease-out ${
           isOpen
             ? "translate-x-0 pointer-events-auto"
             : "translate-x-full pointer-events-none"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200/60 bg-white/80 backdrop-blur-sm">
-          <div className="flex items-center gap-3">
-            <div className="w-1 h-6 bg-black rounded-md" />
-            <h2 className="text-[12px] font-[550] uppercase tracking-widest text-black">
-              Sepetim
-            </h2>
-          </div>
+        <div className="flex items-end justify-end p-3">
+          
           <button
             onClick={closeSidebar}
             className="w-8 h-8 rounded-sm bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-black transition-all duration-200 flex items-center justify-center group"
@@ -101,7 +96,7 @@ export default function CartSidebar() {
         </div>
 
         {/* Content - Scrollable */}
-        <div className="flex-1 overflow-y-auto px-3 py-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+        <div className="flex-1 overflow-y-auto px-3 pb-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-24">
               <div className="w-10 h-10 border-3 border-gray-200 border-t-gray-900 rounded-full animate-spin mb-4" />
@@ -153,7 +148,7 @@ export default function CartSidebar() {
                   return (
                     <div
                       key={item.product._id}
-                      className="group bg-white rounded-xl border border-gray-200/80 p-5 hover:shadow-sm hover:border-gray-300 transition-all duration-300"
+                      className="group bg-white rounded-xl border border-gray-400 p-5 hover:shadow-sm hover:border-gray-300 transition-all duration-300"
                     >
                       <div className="flex gap-4">
                         {/* Ürün Görseli */}
@@ -182,7 +177,7 @@ export default function CartSidebar() {
                               <Link
                                 href={`/urun/${item.product.slug}`}
                                 onClick={closeSidebar}
-                                className="text-[12px] font-[550] uppercase tracking-widest hover:text-gray-600 flex-1 pr-2 line-clamp-2 transition-colors"
+                                className="text-[12px] font-[550] pr-4 uppercase tracking-widest hover:text-gray-600 flex-1  line-clamp-1 transition-colors"
                               >
                                 {item.product.name}
                               </Link>
@@ -211,15 +206,10 @@ export default function CartSidebar() {
                             {/* Birim Fiyat, Adet ve Toplam Fiyat - Yan Yana */}
                             <div className="flex items-center justify-between mt-6 w-full">
                               {/* Birim Fiyat */}
-                              <div className="text-[15px] font-medium tracking-wider text-black font-[Rubik] whitespace-nowrap shrink-0">
-                                ₺{" "}
-                                {item.product.price
-                                  .toFixed(2)
-                                  .replace(".", ",")}
-                              </div>
+                             
 
                               {/* Adet Seçici - Ortada */}
-                              <div className="flex items-center justify-center flex-1 mx-4">
+                              <div className="flex items-center justify-between flex-1">
                                 <div className="flex items-center gap-3">
                                   <button
                                     onClick={() =>
@@ -247,7 +237,7 @@ export default function CartSidebar() {
                                     </svg>
                                   </button>
                                   <div className="min-w-[20px] text-center">
-                                    <span className="text-[14px] font-[550] tracking-wider font-[Rubik] text-black">
+                                    <span className="text-[14px] font-[450] tracking-wider font-[Rubik] text-black">
                                       {item.quantity}
                                     </span>
                                   </div>
@@ -280,7 +270,7 @@ export default function CartSidebar() {
                               </div>
 
                               {/* Toplam Fiyat */}
-                              <div className="text-[15px] font-medium tracking-wide font-[Rubik] text-black whitespace-nowrap shrink-0">
+                              <div className="text-[14px] font-[450] tracking-wider font-[Rubik] text-black whitespace-nowrap shrink-0">
                                 ₺ {itemTotal.toFixed(2).replace(".", ",")}
                               </div>
                             </div>
@@ -296,9 +286,9 @@ export default function CartSidebar() {
 
         {/* Footer - Total and Buttons */}
         {cartItems && Array.isArray(cartItems) && cartItems.length > 0 && (
-          <div className="border-t border-gray-200/60 bg-white/95 backdrop-blur-sm px-6 py-5 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+          <div className="border-t border-gray-400 bg-white/95 backdrop-blur-sm px-6 py-5 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
             {/* Total */}
-            <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-200/60">
+            <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-400">
               <span className="text-[12px] font-semibold uppercase tracking-widest text-black">
                 Toplam
               </span>
