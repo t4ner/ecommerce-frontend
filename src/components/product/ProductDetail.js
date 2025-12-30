@@ -96,7 +96,7 @@ export default function ProductDetail({ product }) {
                 <div ref={sliderRef} className="keen-slider">
                   {product.images.map((image, index) => (
                     <div key={index} className="keen-slider__slide">
-                      <div className="relative border border-gray-100 shadow-md w-full aspect-square overflow-hidden rounded-lg bg-white">
+                      <div className="relative border border-gray-400 shadow-md w-full aspect-square overflow-hidden rounded-lg bg-white">
                         <div className="absolute inset-0 p-4">
                           <Image
                             src={image}
@@ -174,12 +174,12 @@ export default function ProductDetail({ product }) {
         </div>
 
         {/* Sağ Taraf - Ürün Bilgileri (Sticky - Sabit kalır) */}
-        <div className="lg:sticky lg:top-24 lg:self-start lg:col-span-3 mt-6 lg:mt-0">
+        <div className="lg:sticky lg:top-24 lg:self-start lg:col-span-3">
           <div className="flex flex-col space-y-4 md:space-y-6">
             {/* Kategori */}
             <div className="flex items-center gap-2">
               {product.category && (
-                <div className="text-[14px] lg:text-[16px] font-medium uppercase tracking-widest text-gray-500">
+                <div className="text-[13px] lg:text-[16px] font-medium uppercase tracking-widest text-gray-500">
                   {product.category.name}
                 </div>
               )}
@@ -250,7 +250,7 @@ export default function ProductDetail({ product }) {
                       setQuantity(Math.max(1, val));
                     }}
                     disabled={product.stock === 0}
-                    className="w-full text-center text-sm md:text-base font-medium text-black focus:outline-none focus:ring-0 bg-transparent disabled:opacity-50 disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    className="w-full text-center text-xs md:text-base font-medium text-black focus:outline-none focus:ring-0 bg-transparent disabled:opacity-50 disabled:cursor-not-allowed [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     min="1"
                     aria-label="Adet"
                   />
@@ -287,7 +287,7 @@ export default function ProductDetail({ product }) {
                 height={16}
                 className="md:w-5 md:h-5"
               />
-              <span className="text-[9px] md:text-[14px] font-medium tracking-widest text-gray-500 uppercase">
+              <span className="text-[11px] md:text-[14px] font-medium tracking-widest text-gray-500 uppercase">
                 Bu ürünü bugün {randomCount} kişi sepetine ekledi.
               </span>
             </div>
@@ -327,15 +327,15 @@ export default function ProductDetail({ product }) {
                 <Image
                   src="/images/icons/delivery.svg"
                   alt="Kargo"
-                  width={18}
-                  height={18}
+                  width={22}
+                  height={22}
                   className="md:w-[22px] md:h-[22px]"
                 />
                 <div className="flex flex-col gap-0.5 md:gap-1">
-                  <h3 className="text-[14px] lg:text-[14px] font-medium uppercase tracking-widest">
+                  <h3 className="text-[11px] lg:text-[14px] font-medium uppercase tracking-widest">
                     Ücretsiz Kargo
                   </h3>
-                  <p className="text-[14px] lg:text-[14px] font-medium tracking-widest uppercase text-gray-500">
+                  <p className="text-[11px] lg:text-[14px] font-medium tracking-widest uppercase text-gray-500">
                     1500₺ ve üzeri siparişlerde ücretsiz standart kargo
                   </p>
                 </div>
@@ -354,10 +354,10 @@ export default function ProductDetail({ product }) {
                   className="md:w-[22px] md:h-[22px]"
                 />
                 <div className="flex flex-col gap-0.5 md:gap-1">
-                  <h3 className="text-[14px] lg:text-[14px] font-medium uppercase tracking-widest">
+                  <h3 className="text-[11px] lg:text-[14px] font-medium uppercase tracking-widest">
                     %100 güvenli ödeme
                   </h3>
-                  <p className="text-[14px] lg:text-[14px] font-medium tracking-widest uppercase text-gray-500">
+                  <p className="text-[11px] lg:text-[14px] font-medium tracking-widest uppercase text-gray-500">
                     güvenli alışveriş deneyimi için
                   </p>
                 </div>
@@ -372,7 +372,7 @@ export default function ProductDetail({ product }) {
                   className="w-full flex items-center justify-between bg-gray-100 py-3 md:py-4 hover:bg-gray-200 transition-colors duration-500"
                   aria-expanded={isDescriptionOpen}
                 >
-                  <h2 className="text-[10px] md:text-[14px] pl-3 md:pl-5 font-medium uppercase tracking-widest text-black">
+                  <h2 className="text-[11px] md:text-[14px] pl-3 md:pl-5 font-medium uppercase tracking-widest text-black">
                     Ürün Açıklaması
                   </h2>
                   <Image
@@ -393,7 +393,7 @@ export default function ProductDetail({ product }) {
                   }`}
                 >
                   <div className="bg-white px-1 py-3 md:py-4 border-t border-gray-200">
-                    <p className="text-[9px] md:text-[14px] font-medium uppercase tracking-[0.07em] leading-4 md:leading-5 text-gray-500">
+                    <p className="text-[11px] md:text-[14px] font-medium uppercase tracking-[0.07em] leading-4 md:leading-5 text-gray-500">
                       {product.description}
                     </p>
                   </div>

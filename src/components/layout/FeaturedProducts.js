@@ -91,7 +91,7 @@ export default function FeaturedProducts() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0 mb-6 md:mb-10">
         <div className="flex items-center gap-2 md:gap-4">
-          <h2 className="text-[14px] lg:text-[17px] font-medium uppercase tracking-widest">
+          <h2 className="text-[13px] lg:text-[17px] font-medium uppercase tracking-widest">
             Öne Çıkan Ürünler
           </h2>
 
@@ -128,11 +128,11 @@ export default function FeaturedProducts() {
 
         {mainCategories?.length > 0 && (
           <div className="flex gap-3 md:gap-6 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-            {mainCategories.slice(0, 4).map((category) => (
+            {mainCategories.slice(0, 5).map((category) => (
               <button
                 key={category._id}
                 onClick={() => setSelectedCategory(category._id)}
-                className={`relative text-[14px] lg:text-[16px] cursor-pointer font-medium tracking-widest uppercase transition-colors whitespace-nowrap after:absolute after:left-0 after:-bottom-1 after:h-0.25 after:bg-black after:transition-all ${
+                className={`relative text-[12px] lg:text-[16px] cursor-pointer font-medium tracking-widest uppercase transition-colors whitespace-nowrap after:absolute after:left-0 after:-bottom-1 after:h-0.25 after:bg-black after:transition-all ${
                   selectedCategory === category._id
                     ? "text-black after:w-full"
                     : "text-gray-400 hover:text-gray-700 after:w-0"
@@ -156,7 +156,7 @@ export default function FeaturedProducts() {
                 className="keen-slider__slide group flex flex-col"
               >
                 {/* Image */}
-                <div className="relative border border-gray-100 shadow-md w-full aspect-square max-w-[350px] mx-auto overflow-hidden rounded-lg mb-3 md:mb-3 bg-white">
+                <div className="relative border border-gray-400 shadow-md w-full aspect-square max-w-[350px] mx-auto overflow-hidden rounded-lg mb-2 md:mb-3 bg-white">
                   {product.images?.[0] ? (
                     <>
                       <Image
@@ -188,14 +188,14 @@ export default function FeaturedProducts() {
 
                 {/* Info */}
                 <div className="flex flex-col gap-1.5 md:gap-2 w-full max-w-[350px] mx-auto ">
-                  <h3 className="uppercase  text-[14px] lg:text-[15px] font-medium tracking-widest text-black line-clamp-1">
+                  <h3 className="uppercase  text-[11px] lg:text-[15px] font-medium tracking-widest text-black line-clamp-1">
                     {product.name}
                   </h3>
                   {/* Fiyat */}
                   <div className="flex items-center gap-x-5">
                     <div className="flex items-center gap-1.5">
                      
-                      <span className="text-[14px] lg:text-[15px] font-medium tracking-widest text-black">
+                      <span className="text-[13px] lg:text-[15px] font-medium tracking-widest text-black">
                         {product.price},00TL
                       </span>
                     </div>

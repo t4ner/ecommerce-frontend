@@ -68,7 +68,7 @@ export default function Categories() {
     <section className="px-4 md:px-0">
       {/* Header */}
       <div className="flex items-center justify-between gap-4 mb-6 sm:mb-8 lg:mb-10">
-        <h2 className="text-[14px] lg:text-[17px] font-medium uppercase tracking-widest">
+        <h2 className="text-[13px] lg:text-[17px] font-medium uppercase tracking-widest">
           Kategoriler
         </h2>
 
@@ -136,7 +136,7 @@ export default function Categories() {
             </div>
 
             {/* Category Name */}
-            <span className="border border-gray-400 py-1.5 px-3 sm:py-2 sm:px-4 lg:px-5 rounded-lg text-center text-[12px] lg:text-[14px] font-medium uppercase tracking-widest mt-2 sm:mt-3">
+            <span className="border border-gray-400 py-1.5 px-3 sm:py-2 sm:px-4 lg:px-5 rounded-lg text-center text-[11px] lg:text-[14px] font-medium uppercase tracking-widest mt-2 sm:mt-3">
               {category.name}
             </span>
           </Link>

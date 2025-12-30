@@ -64,7 +64,7 @@ export default function NewProducts() {
     <section className="px-4 md:px-0">
       {/* Header */}
       <div className="flex items-center gap-2 md:gap-4 mb-6 md:mb-10">
-        <h2 className="text-[14px] lg:text-[17px] font-medium uppercase tracking-widest">
+        <h2 className="text-[13px] lg:text-[17px] font-medium uppercase tracking-widest">
           Yeni Ürünler
         </h2>
 
@@ -110,7 +110,7 @@ export default function NewProducts() {
                 className="keen-slider__slide group flex flex-col"
               >
                 {/* Image */}
-                <div className="relative border border-gray-100 shadow-md w-full aspect-square max-w-[350px] mx-auto overflow-hidden rounded-lg mb-3 md:mb-3 bg-white">
+                <div className="relative border border-gray-400 shadow-md w-full aspect-square max-w-[350px] mx-auto overflow-hidden rounded-lg mb-2 md:mb-3 bg-white">
                   {product.images?.[0] ? (
                     <>
                       <Image
@@ -142,14 +142,14 @@ export default function NewProducts() {
 
                 {/* Info */}
                 <div className="flex flex-col gap-1.5 md:gap-2 w-full max-w-[350px] mx-auto">
-                  <h3 className="uppercase text-[14px] lg:text-[15px] font-medium tracking-widest text-black line-clamp-1">
+                  <h3 className="uppercase text-[11px] lg:text-[15px] font-medium tracking-widest text-black line-clamp-1">
                     {product.name}
                   </h3>
                   {/* Fiyat */}
                   <div className="flex items-end gap-x-5">
                     <div className="flex items-baseline gap-1.5">
                      
-                      <span className="text-[14px] lg:text-[15px] font-medium tracking-widest text-black">
+                      <span className="text-[13px] lg:text-[15px] font-medium tracking-widest text-black">
                         {product.price},00TL
                       </span>
                     </div>

@@ -114,13 +114,13 @@ export default function CartSidebar() {
                   />
                 </div>
               </div>
-              <p className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest text-black mb-7">
+              <p className="text-[13px] lg:text-[15px] font-medium uppercase tracking-widest text-black mb-7">
                 Sepetiniz boş
               </p>
 
               <button
                 onClick={closeSidebar}
-                className="inline-flex items-center gap-2 px-8 py-3.5  bg-black text-white uppercase tracking-widest text-[14px] lg:text-[14px] font-medium hover:from-gray-800 hover:to-gray-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-2 px-8 py-3.5  bg-black text-white uppercase tracking-widest text-[12px] lg:text-[14px] font-medium hover:from-gray-800 hover:to-gray-700 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 Alışverişe Devam Et
                 <svg
@@ -148,7 +148,7 @@ export default function CartSidebar() {
                   return (
                     <div
                       key={item.product._id}
-                      className="group bg-white rounded-xl border border-gray-400 p-5 hover:shadow-sm hover:border-gray-300 transition-all duration-300"
+                      className="group bg-white rounded-xl border border-gray-400 p-2 lg:p-5 hover:shadow-sm hover:border-gray-300 transition-all duration-300"
                     >
                       <div className="flex gap-4">
                         {/* Ürün Görseli */}
@@ -177,14 +177,14 @@ export default function CartSidebar() {
                               <Link
                                 href={`/urun/${item.product.slug}`}
                                 onClick={closeSidebar}
-                                className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest hover:text-gray-600 flex-1  line-clamp-1 transition-colors"
+                                className="text-[11px] lg:text-[15px] font-medium uppercase tracking-widest hover:text-gray-600 flex-1  line-clamp-1 transition-colors"
                               >
                                 {item.product.name}
                               </Link>
                               <button
                                 onClick={() => handleRemove(item.product._id)}
                                 disabled={isRemoving}
-                                className="w-8 h-8 rounded-sm bg-red-50 text-red-500 disabled:opacity-50 transition-all duration-200 flex items-center justify-center shrink-0 group/remove"
+                                className="lg:w-8 lg:h-8 w-7 h-7 rounded-sm bg-red-50 text-red-500 disabled:opacity-50 transition-all duration-200 flex items-center justify-center shrink-0 group/remove"
                                 aria-label="Ürünü sil"
                               >
                                 <svg
@@ -289,7 +289,7 @@ export default function CartSidebar() {
           <div className="border-t border-gray-400 bg-white/95 backdrop-blur-sm px-6 py-5 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
             {/* Total */}
             <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-400">
-              <span className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest text-black">
+              <span className="text-[12px] lg:text-[15px] font-medium uppercase tracking-widest text-black">
                 Toplam
               </span>
               <span className="text-[14px] lg:text-[15px] font-medium tracking-widest text-black">
@@ -302,7 +302,7 @@ export default function CartSidebar() {
               <Link
                 href="/sepet"
                 onClick={closeSidebar}
-                className="flex-1 py-4 px-5 bg-black text-white uppercase tracking-widest text-[14px] lg:text-[15px] font-medium hover:from-gray-800 hover:to-gray-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group"
+                className="flex-1 py-4 px-5 bg-black text-white uppercase tracking-widest text-[12px] lg:text-[15px] font-medium hover:from-gray-800 hover:to-gray-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group"
               >
                 <span>ÖDEME ADIMINA GİT</span>
               </Link>

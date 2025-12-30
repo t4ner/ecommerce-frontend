@@ -75,7 +75,7 @@ export default function CategoryProducts({ categorySlug }) {
               }`}
             >
               {/* Image */}
-              <div className="relative aspect-square border border-gray-100 shadow-md w-full overflow-hidden rounded-lg mb-3 md:mb-3 bg-white">
+              <div className="relative aspect-square border border-gray-400 shadow-md w-full overflow-hidden rounded-lg mb-3 md:mb-3 bg-white">
                 {product.images?.[0] ? (
                   <>
                     <Image

@@ -48,7 +48,7 @@ export default function InfoBar() {
 
             {/* Text content */}
             <div className="flex flex-col">
-              <h3 className="font-medium text-[8px] sm:text-[11px] md:text-[14px] uppercase tracking-widest">
+              <h3 className="font-medium text-[11px] md:text-[14px] uppercase tracking-widest">
                 {feature.title}
               </h3>
             </div>
