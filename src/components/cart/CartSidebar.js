@@ -114,13 +114,13 @@ export default function CartSidebar() {
                   />
                 </div>
               </div>
-              <p className="text-[13px] font-[550] uppercase tracking-widest text-black mb-7">
+              <p className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest text-black mb-7">
                 Sepetiniz boş
               </p>
 
               <button
                 onClick={closeSidebar}
-                className="inline-flex items-center gap-2 px-8 py-3.5  bg-black text-white uppercase tracking-widest text-[11px] font-[550] hover:from-gray-800 hover:to-gray-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-2 px-8 py-3.5  bg-black text-white uppercase tracking-widest text-[14px] lg:text-[14px] font-medium hover:from-gray-800 hover:to-gray-700 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 Alışverişe Devam Et
                 <svg
@@ -177,7 +177,7 @@ export default function CartSidebar() {
                               <Link
                                 href={`/urun/${item.product.slug}`}
                                 onClick={closeSidebar}
-                                className="text-[12px] font-[550] pr-4 uppercase tracking-widest hover:text-gray-600 flex-1  line-clamp-1 transition-colors"
+                                className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest hover:text-gray-600 flex-1  line-clamp-1 transition-colors"
                               >
                                 {item.product.name}
                               </Link>
@@ -237,7 +237,7 @@ export default function CartSidebar() {
                                     </svg>
                                   </button>
                                   <div className="min-w-[20px] text-center">
-                                    <span className="text-[14px] font-[450] tracking-wider font-[Rubik] text-black">
+                                    <span className="text-[14px] lg:text-[15px] font-medium tracking-widest text-black">
                                       {item.quantity}
                                     </span>
                                   </div>
@@ -270,8 +270,8 @@ export default function CartSidebar() {
                               </div>
 
                               {/* Toplam Fiyat */}
-                              <div className="text-[14px] font-[450] tracking-wider font-[Rubik] text-black whitespace-nowrap shrink-0">
-                                ₺ {itemTotal.toFixed(2).replace(".", ",")}
+                              <div className="text-[14px] lg:text-[15px] font-medium tracking-widest text-black whitespace-nowrap shrink-0">
+                                {itemTotal.toFixed(2).replace(".", ",")}TL
                               </div>
                             </div>
                           </div>
@@ -289,11 +289,11 @@ export default function CartSidebar() {
           <div className="border-t border-gray-400 bg-white/95 backdrop-blur-sm px-6 py-5 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
             {/* Total */}
             <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-400">
-              <span className="text-[12px] font-semibold uppercase tracking-widest text-black">
+              <span className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest text-black">
                 Toplam
               </span>
-              <span className="text-[15px] font-medium tracking-wider font-[Rubik] text-black">
-                ₺ {totalPrice.toFixed(2).replace(".", ",")}
+              <span className="text-[14px] lg:text-[15px] font-medium tracking-widest text-black">
+                {totalPrice.toFixed(2).replace(".", ",")}TL
               </span>
             </div>
 
@@ -302,7 +302,7 @@ export default function CartSidebar() {
               <Link
                 href="/sepet"
                 onClick={closeSidebar}
-                className="flex-1 py-4 px-5 bg-black text-white uppercase tracking-widest text-xs font-semibold hover:from-gray-800 hover:to-gray-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group"
+                className="flex-1 py-4 px-5 bg-black text-white uppercase tracking-widest text-[14px] lg:text-[15px] font-medium hover:from-gray-800 hover:to-gray-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group"
               >
                 <span>ÖDEME ADIMINA GİT</span>
               </Link>

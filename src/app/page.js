@@ -7,7 +7,7 @@ import InfoBar from "@/components/layout/InfoBar";
 
 export default function Home() {
   return (
-    <div className="space-y-30">
+    <div className= "space-y-15 lg:space-y-30">
       <Banner />
       <Categories />
       <FeaturedProducts />

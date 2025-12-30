@@ -26,7 +26,7 @@ export default function Campaigns() {
         {campaigns.slice(0, 2).map((campaign, index) => (
           <div
             key={campaign._id || campaign.id || `campaign-${index}`}
-            className="w-full relative rounded-lg overflow-hidden h-[500px] md:h-[650px]"
+            className="w-full relative lg:rounded-lg overflow-hidden h-[500px] md:h-[650px]"
           >
             {campaign.slug ? (
               <Link

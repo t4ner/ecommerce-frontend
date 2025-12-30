@@ -20,13 +20,13 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="container mx-auto flex justify-center border-y border-gray-400 py-5">
+    <nav className="hidden  container mx-auto lg:flex justify-center border-y border-gray-400 py-5">
       {isLoading ? (
         <div className="text-sm text-gray-500">Yükleniyor...</div>
       ) : isError ? (
         <div className="text-sm text-red-500">Hata oluştu</div>
       ) : (
-        <ul className="flex items-center gap-20 text-[12px] font-[550] uppercase tracking-widest">
+        <ul className="flex items-center gap-20 text-[14px] lg:text-[15px] font-medium uppercase tracking-widest">
           {visibleCategories && visibleCategories.length > 0 ? (
             visibleCategories.map((category) => (
               <li

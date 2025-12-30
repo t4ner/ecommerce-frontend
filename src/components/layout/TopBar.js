@@ -17,8 +17,8 @@ function TopBar() {
 
   if (isLoading) {
     return (
-      <div className="h-10 bg-black flex items-center justify-center">
-        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+      <div className="h-8 lg:h-10 bg-black flex items-center justify-center">
+        <div className="w-3 h-3 lg:w-4 lg:h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -26,15 +26,15 @@ function TopBar() {
   if (messages.length === 0) return null;
 
   return (
-    <div className="h-10 bg-black text-white overflow-hidden">
+    <div className="h-8 lg:h-10 bg-black text-white overflow-hidden">
       <div className="flex h-full items-center">
         <div className="flex whitespace-nowrap min-w-max animate-scroll">
           {messages.map((announcement, index) => (
             <div
               key={`${announcement._id}-${index}`}
-              className="px-8 shrink-0 flex items-center"
+              className="px-6 lg:px-8 shrink-0 flex items-center"
             >
-              <span className="text-[12px] font-[550] uppercase tracking-widest">
+              <span className="text-[10px] lg:text-[14px] font-[550] uppercase tracking-widest">
                 {announcement.message}
               </span>
             </div>

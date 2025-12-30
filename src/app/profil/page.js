@@ -45,11 +45,11 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="py-14">
+    <div className="py-14 min-h-[65vh]">
       <div className="">
         {/* Header */}
         <div className="mb-10">
-          <h1 className="text-[14px] font-[550] uppercase tracking-widest text-black">
+          <h1 className="text-[15px] font-medium uppercase tracking-widest text-black">
             Hesabım
           </h1>
         </div>
@@ -71,10 +71,10 @@ export default function ProfilePage() {
 
               {/* User Info */}
               <div className="">
-                <h2 className="text-[14px] font-[550] uppercase tracking-widest text-black mb-3">
+                <h2 className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest text-black mb-3">
                   {user.name}
                 </h2>
-                <p className="text-[10px] font-medium uppercase tracking-widest text-gray-500">
+                <p className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest text-gray-500">
                   {user.email}
                 </p>
               </div>
@@ -82,7 +82,7 @@ export default function ProfilePage() {
           </div>
         </div>
         <div className="py-6">
-          <h2 className="text-[14px] font-[550] uppercase tracking-widest text-black mt-7">
+          <h2 className="text-[15px] font-medium uppercase tracking-widest text-black mt-7">
             Siparişlerim{" "}
           </h2>
         </div>

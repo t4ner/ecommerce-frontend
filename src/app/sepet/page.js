@@ -57,7 +57,7 @@ export default function CartPage() {
       <div className="container mx-auto">
         {/* Başlık ve Ürün Sayısı */}
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-[14px] font-[550] uppercase tracking-widest text-black">
+          <h1 className="text-[15px] font-medium uppercase tracking-widest text-black">
             SEPETİM
           </h1>
         </div>
@@ -65,14 +65,19 @@ export default function CartPage() {
         {cartItems.length === 0 ? (
           <div className="text-center py-20">
             <div className="mb-6 flex justify-center">
-            <Image src="/images/icons/basket.svg" alt="Sepet Boş" width={40} height={40} />
+              <Image
+                src="/images/icons/basket.svg"
+                alt="Sepet Boş"
+                width={40}
+                height={40}
+              />
             </div>
-            <p className="text-[13px] font-[550] uppercase tracking-widest text-black mb-4">
+            <p className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest text-black mb-4">
               Sepetiniz boş
             </p>
             <Link
               href="/"
-              className="inline-block px-8 py-3 bg-black text-white uppercase tracking-widest text-[12px] font-[550] hover:bg-gray-800 transition-all"
+              className="inline-block px-8 py-3 bg-black text-white uppercase tracking-widest text-[14px] lg:text-[15px] font-medium hover:bg-gray-800 transition-all"
             >
               Alışverişe Devam Et
             </Link>
@@ -112,7 +117,7 @@ export default function CartPage() {
                           <div className="flex items-start justify-between mb-2">
                             <Link
                               href={`/urun/${item.product.slug}`}
-                              className="text-[13px] font-[550] uppercase tracking-widest  hover:text-gray-600 flex-1 pr-4"
+                              className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest  hover:text-gray-600 flex-1 pr-4"
                             >
                               {item.product.name}
                             </Link>
@@ -139,8 +144,8 @@ export default function CartPage() {
                           </div>
 
                           {/* Birim Fiyat */}
-                          <div className="text-[15px] font-medium uppercase tracking-widest font-[Rubik]  mb-4">
-                            ₺ {item.product.price.toFixed(2).replace(".", ",")}
+                          <div className="text-[15px] font-medium uppercase tracking-widest  mb-4">
+                            {item.product.price.toFixed(2).replace(".", ",")}TL
                           </div>
 
                           {/* Adet ve Toplam Fiyat */}
@@ -174,7 +179,7 @@ export default function CartPage() {
                                   </svg>
                                 </button>
                                 <div className="min-w-[30px] text-center">
-                                  <span className="text-[14px] font-medium font-[Rubik] text-black">
+                                  <span className="text-[14px] lg:text-[15px] font-medium tracking-widest text-black">
                                     {item.quantity}
                                   </span>
                                 </div>
@@ -208,8 +213,9 @@ export default function CartPage() {
 
                             {/* Toplam Fiyat */}
                             <div className="text-right">
-                              <div className="text-[16px] font-medium tracking-wider font-[Rubik] text-black">
-                                ₺ {itemTotal.toFixed(2).replace(".", ",")}
+                              <div className="text-[16px] font-medium tracking-widest text-black">
+                                {itemTotal.toFixed(2).replace(".", ",")}TL
+                              
                               </div>
                             </div>
                           </div>
@@ -223,7 +229,7 @@ export default function CartPage() {
                 <button
                   onClick={handleClearCart}
                   disabled={isClearing}
-                  className="text-[13px] text-red-600 hover:text-red-700 disabled:opacity-50 uppercase tracking-widest font-[550] transition-all"
+                  className="text-[14px] lg:text-[15px] font-medium text-red-600 hover:text-red-700 disabled:opacity-50 uppercase tracking-widest transition-all"
                 >
                   {isClearing ? "Temizleniyor..." : "Sepeti Temizle"}
                 </button>
@@ -233,20 +239,20 @@ export default function CartPage() {
             {/* Sipariş Özeti - Modern Kart */}
             <div className="lg:col-span-1">
               <div className=" border border-gray-400 rounded-lg p-6 sticky top-24">
-                <h2 className="text-[13px] font-[550] uppercase tracking-widest mb-6 pb-4 border-b border-gray-400">
+                <h2 className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest mb-6 pb-4 border-b border-gray-400">
                   Sipariş Özeti
                 </h2>
 
                 <div className="space-y-3 mb-6">
-                  <div className="flex justify-between text-[13px] text-gray-400">
-                    <span className=" font-[550] uppercase tracking-widest">
+                  <div className="flex justify-between text-[14px] lg:text-[15px] text-gray-400">
+                    <span className="text-[14px] lg:text-[15px] font-medium uppercase tracking-widest">
                       Ara Toplam
                     </span>
-                    <span className="text-[16px] font-medium tracking-wider font-[Rubik] text-black">
-                      ₺{totalPrice.toFixed(2).replace(".", ",")}
+                    <span className="text-[16px] font-medium  tracking-widest text-black">
+                      {totalPrice.toFixed(2).replace(".", ",")}TL
                     </span>
                   </div>
-                  <div className="flex justify-between text-[13px] font-[550] uppercase tracking-widest text-gray-400 mb-6  ">
+                  <div className="flex justify-between text-[14px] lg:text-[15px] font-medium uppercase tracking-widest text-gray-400 mb-6  ">
                     <span>Kargo</span>
                     <span className="text-[13px] font-medium tracking-widest text-black">
                       {totalPrice >= 1500 ? "Ücretsiz" : "₺50,00"}
@@ -254,29 +260,24 @@ export default function CartPage() {
                   </div>
                   <div className="pt-3 mt-3 border-t border-gray-400">
                     <div className="flex justify-between text-[16px] font-medium tracking-wider uppercase  mb-6 pb-4  mt-5 border-b border-gray-400">
-                      <span className=" text-gray-400 text-[13px] font-[550] tracking-widest">
+                      <span className=" text-gray-400 text-[14px] lg:text-[15px] font-medium tracking-widest">
                         Toplam
                       </span>
-                      <span className="font-[Rubik]">
-                        <span className="font-[Rubik]">
-                          ₺
-                          {(totalPrice >= 1500 ? totalPrice : totalPrice + 50)
+                      <span className="text-[16px] font-medium tracking-widest text-black"> {totalPrice >= 1500 ? totalPrice : (totalPrice + 50)
                             .toFixed(2)
-                            .replace(".", ",")}
-                        </span>
-                      </span>
+                            .replace(".", ",")}TL</span>
                     </div>
                   </div>
                 </div>
 
-                <button className="w-full py-4 px-6 uppercase tracking-widest text-[12px] font-[550] transition-all flex items-center justify-center gap-2 bg-black text-white hover:bg-gray-800 active:scale-[0.98] ">
+                <button className="w-full py-4 px-6 uppercase tracking-widest text-[14px] lg:text-[15px] font-medium transition-all flex items-center justify-center gap-2 bg-black text-white hover:bg-gray-800 active:scale-[0.98] ">
                   Ödeme Yap
                 </button>
 
                 <div className="mt-4 text-center">
                   <Link
                     href="/"
-                    className="text-[10px] font-medium text-gray-500 hover:text-gray-700 uppercase tracking-widest transition-colors"
+                    className="text-[14px] lg:text-[15px] font-medium text-gray-500 hover:text-gray-700 uppercase tracking-widest transition-colors"
                   >
                     Alışverişe Devam Et
                   </Link>

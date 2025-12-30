@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useAuthStore } from "@/stores/authStore";
 
+axios.defaults.headers.common["ngrok-skip-browser-warning"] = "true";
+
 const api = axios.create({
-  baseURL: "http://localhost:5858/api",
+  baseURL: "https://lizette-unfurbelowed-carly.ngrok-free.dev/api/",
   withCredentials: true, // Cookie'ler için gerekli (refreshToken httpOnly cookie'de)
   headers: {
     "Content-Type": "application/json",
   },
 });
-
 // Zustand store'a erişim helper
 const getAuthStore = () => {
   if (typeof window !== "undefined") {
