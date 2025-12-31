@@ -1,36 +1,78 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useBanners } from "@/hooks/banners/useBanners";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Banner() {
   const { data: banners, isLoading } = useBanners();
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const autoplayRef = useRef(null);
 
   // Mobil kontrolü
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768); // md breakpoint
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Otomatik geçiş
+  const [sliderRef, sliderInstanceRef] = useKeenSlider({
+    loop: true, // Sınırsız döngü
+    slides: {
+      perView: 1,
+    },
+    initial: 0,
+    slideChanged: (slider) => {
+      // Aktif slide değiştiğinde currentIndex'i güncelle
+      const current = slider.track.details.rel;
+      setCurrentIndex(current);
+    },
+    created: () => {
+      // Slider oluşturulduğunda otomatik geçişi başlat
+      if (banners && banners.length > 1) {
+        autoplayRef.current = setInterval(() => {
+          sliderInstanceRef.current?.next();
+        }, 5000);
+      }
+    },
+    destroyed: () => {
+      // Slider yok edildiğinde interval'i temizle
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+      }
+    },
+  });
+
+  // Banners değiştiğinde slider'ı güncelle
   useEffect(() => {
-    if (!banners || banners.length <= 1) return;
+    if (banners && banners.length > 0) {
+      sliderInstanceRef.current?.update();
 
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % banners.length);
-    }, 5000);
+      // Otomatik geçiş interval'ini yeniden başlat
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+      }
+      if (banners.length > 1) {
+        autoplayRef.current = setInterval(() => {
+          sliderInstanceRef.current?.next();
+        }, 5000);
+      }
+    }
 
-    return () => clearInterval(interval);
-  }, [banners]);
+    return () => {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+      }
+    };
+  }, [banners, sliderInstanceRef]);
 
   if (isLoading) {
     return (
@@ -44,28 +86,36 @@ export default function Banner() {
     return null;
   }
 
-  const goToSlide = (index) => setCurrentIndex(index);
-  const goToPrevious = () =>
-    setCurrentIndex((prev) => (prev - 1 + banners.length) % banners.length);
-  const goToNext = () => setCurrentIndex((prev) => (prev + 1) % banners.length);
+  const goToSlide = (index) => {
+    sliderInstanceRef.current?.moveToIdx(index);
+  };
+
+  const goToPrevious = () => {
+    sliderInstanceRef.current?.prev();
+  };
+
+  const goToNext = () => {
+    sliderInstanceRef.current?.next();
+  };
 
   return (
-    <div className="relative w-full h-[450px]  lg:h-[700px] lg:rounded-lg lg:mt-5 overflow-hidden group">
-      {/* Banner Container - Slide Geçişi */}
-      <div
-        className="flex transition-transform duration-700 ease-in-out h-full"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
+    <div className="relative w-full h-[450px] lg:h-[700px] lg:rounded-lg lg:mt-5 overflow-hidden group">
+      {/* Banner Container - Keen Slider */}
+      <div ref={sliderRef} className="keen-slider h-full">
         {banners.map((banner, index) => {
           const hasSlug = banner.slug?.trim();
           const isFirstBanner = index === 0;
           // Mobilde imageUrlMobile varsa onu kullan, yoksa imageUrl kullan
-          const imageSrc = isMobile && banner.imageUrlMobile 
-            ? banner.imageUrlMobile 
-            : banner.imageUrl;
-          
+          const imageSrc =
+            isMobile && banner.imageUrlMobile
+              ? banner.imageUrlMobile
+              : banner.imageUrl;
+
           return (
-            <div key={banner._id} className="w-full shrink-0 relative">
+            <div
+              key={banner._id}
+              className="keen-slider__slide w-full h-full relative"
+            >
               {hasSlug ? (
                 <Link
                   href={`/${banner.slug.trim()}`}
