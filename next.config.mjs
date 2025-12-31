@@ -5,10 +5,6 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cdn.myikas.com",
-      },
-      {
-        protocol: "https",
         hostname: "res.cloudinary.com",
       },
 
@@ -17,7 +13,6 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   // Production optimizasyonları
-  swcMinify: true,
   compress: true,
   poweredByHeader: false,
   // Build optimizasyonları
