@@ -80,7 +80,7 @@ export default function LoginPage() {
                 placeholder="ŞİFRE"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 font-medium border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-400 placeholder:text-[12px] uppercase tracking-wide text-[16px] md:text-[14px] lg:text-[15px] placeholder:tracking-widest"
+                className="w-full px-4 py-3 font-medium border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-black placeholder-gray-400 placeholder:text-[12px] tracking-wide text-[16px] md:text-[14px] lg:text-[15px] placeholder:tracking-widest"
                 required
                 disabled={isPending}
               />

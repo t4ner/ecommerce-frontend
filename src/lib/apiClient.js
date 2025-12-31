@@ -4,7 +4,7 @@ import { useAuthStore } from "@/stores/authStore";
 axios.defaults.headers.common["ngrok-skip-browser-warning"] = "true";
 
 const api = axios.create({
-  baseURL: "https://lizette-unfurbelowed-carly.ngrok-free.dev/api/",
+  baseURL: "https://ecommerce-backend-iftg.onrender.com/api/",
   withCredentials: true, // Cookie'ler için gerekli (refreshToken httpOnly cookie'de)
   headers: {
     "Content-Type": "application/json",

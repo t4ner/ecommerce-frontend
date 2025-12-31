@@ -23,16 +23,16 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="pt-14 bg-black text-white">
+    <footer className="py-4 bg-black text-white">
       <div className="container mx-auto">
         {/* Second Row - Categories */}
-        <div className="flex flex-wrap items-center justify-center gap-4 py-4 border-t border-gray-400">
+        <div className="flex flex-wrap items-center justify-center gap-4 py-4  border-gray-400">
           {mainCategories && mainCategories.length > 0 ? (
             mainCategories.map((category, index) => (
               <span key={category._id} className="flex items-center">
                 <Link
                   href={`/kategori/${category.slug}`}
-                  className="text-[11px] font-[550] uppercase tracking-widest transition-colors hover:text-black"
+                  className="text-[12px] lg:text-[13px] font-medium uppercase tracking-widest transition-colors hover:text-black"
                 >
                   {category.name}
                 </Link>
@@ -51,7 +51,7 @@ export default function Footer() {
                 "KATEGORİ 5",
               ].map((cat, index) => (
                 <span key={cat} className="flex items-center">
-                  <span className="text-[11px] font-[550] uppercase tracking-widest">
+                  <span className="text-[12px] lg:text-[13px] font-medium uppercase tracking-widest">
                     {cat}
                   </span>
                   {index < 4 && <span className="mx-2 text-gray-400">•</span>}
@@ -66,7 +66,7 @@ export default function Footer() {
             <span key={link.name} className="flex items-center">
               <Link
                 href={link.href}
-                className="text-[11px] font-[550] uppercase tracking-widest transition-colors hover:text-black"
+                className="text-[12px] lg:text-[13px] font-medium uppercase tracking-widest transition-colors hover:text-black"
               >
                 {link.name}
               </Link>
@@ -96,7 +96,7 @@ export default function Footer() {
 
             {/* Attribution - Center */}
             <div className="text-center">
-              <p className="text-[11px] font-[550] uppercase tracking-widest">
+              <p className="text-[11px] lg:text-[13px] font-medium uppercase tracking-widest">
                 Taanzera E-Ticaret Altyapısı ile Hazırlanmıştır.
               </p>
             </div>
@@ -107,7 +107,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] font-[550] uppercase tracking-widest"
+                className="text-[11px] lg:text-[13px] font-medium uppercase tracking-widest"
               >
                 Instagram
               </Link>
